@@ -1,0 +1,64 @@
+while true do
+    wait(1e-60)
+    local player = game:GetService("Players").LocalPlayer
+
+    local dualpistol = player.Character:FindFirstChild("Dualpistol")
+    if dualpistol then
+        local dualpistolArgs = {
+            {
+                {
+                    "\4",
+                    "GunCombat",
+                    {
+                        Vector3.new(),
+                        Vector3.new()
+                    },
+                    false,
+                    dualpistol,
+                    "Gun"
+                }
+            }
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(dualpistolArgs))
+    end
+
+    local Vampire = player.Character:FindFirstChild("Vampire")
+    if Vampire then
+        local vampireArgs = {
+            {
+                {
+                    "\4",
+                    "Combat",
+                    {
+                        Vector3.new(),
+                        Vector3.new()
+                    },
+                    false,
+                    Vampire,
+                    "Fruit"
+                }
+            }
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(vampireArgs))
+    end
+
+    local Blackleg = player.Character:FindFirstChild("Blackleg")
+    if Blackleg then
+        local blacklegArgs = {
+            {
+                {
+                    "\4",
+                    "Combat",
+                    {
+                        Vector3.new(),
+                        Vector3.new()
+                    },
+                    false,
+                    Blackleg,
+                    "Melee"
+                }
+            }
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(blacklegArgs))
+    end
+end
