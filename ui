@@ -1,6 +1,9 @@
 
 
 
+	
+
+
 
 
 
@@ -3656,6 +3659,176 @@ end)
 	
 
 
+function EquipWeapon(ToolSe)
+if not _G.NotAutoEquip then
+if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+wait(.1)
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+end
+end
+end
+
+if _G.Select_Weapon == nil then
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+if v.ToolTip == "Melee" then
+if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+_G.Select_Weapon = tostring(v.Name)
+end
+end
+end
+end
+
+WeaponList = {}
+
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+if v:IsA("Tool") then
+table.insert(WeaponList ,v.Name)
+end
+end
+local SelectWeapona = Main:Dropdown("Chọn Item Farm",WeaponList,function(value)
+ _G.Select_Weapon = value
+ end)
+
+Main:Button("Làm mới item",function()
+ SelectWeapona:Clear()
+ for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+ SelectWeapona:Add(v.Name)
+ end
+end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.click then
+             pcall(function()
+                game:GetService'VirtualUser':CaptureController()
+			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
+            end)
+        end
+    end)
+end)
+
+--Main:Button("Stop Teleport",function()
+ -- topos(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+  --_G.Clip = false
+ -- end)
+
+
+
+
+
+		
+spawn(function()
+			while task.wait() do
+				pcall(function()
+					if _G.AutoFarmMaterial and _G.SelectMaterial then
+						MaterialMon()
+						if game.Workspace.Enemies:FindFirstChild(MMon) then
+							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								if v.Name == MMon then
+									if v:FindFirstChild("HumanoidRootPart") then
+										repeat task.wait()
+											AutoHaki()
+											EquipWeapon(_G.Select_Weapon)
+												PosMon = v.HumanoidRootPart.CFrame
+												v.HumanoidRootPart.CanCollide = false
+												v.Humanoid.WalkSpeed = 0
+												v.Head.CanCollide = false
+												v.HumanoidRootPart.Size = Vector3.new(1,1,1)
+												StartMagnet = true
+												topos(v.HumanoidRootPart.CFrame * MethodFarm)
+												game:GetService'VirtualUser':CaptureController()
+												game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+											MatMon = v.Name
+											MatPos = v.HumanoidRootPart.CFrame
+										until not _G.AutoFarmMaterial or not v.Parent or v.Humanoid.Health <= 0
+									end
+								end
+							end
+						else
+							topos(MPos)
+						end
+					end
+				end)
+			end
+end)
+
+
+
+spawn(function()
+			while task.wait() do
+				if _G.AutoFarmSelectMonster then
+					pcall(function()
+						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							if v.Name == Mon and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 400 then
+								v.Humanoid.WalkSpeed = 0
+								v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+								--v.Humanoid:ChangeState(14)
+								v.HumanoidRootPart.CanCollide = false
+								v.Head.CanCollide = false
+								v.HumanoidRootPart.CFrame = PosMon
+								if v.Humanoid:FindFirstChild("Animator") then
+									v.Humanoid.Animator:Destroy()
+								end
+								v.Humanoid:ChangeState(11)
+								v.Humanoid:ChangeState(14)
+								sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+							end
+						end
+					end)
+				end
+			end
+end)
+
+spawn(function()
+			while task.wait() do
+				if _G.AutoFarmSelectMonster then
+					pcall(function()
+						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							if v.Name == Ms and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 400 then
+								v.Humanoid.WalkSpeed = 0
+								v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+								--v.Humanoid:ChangeState(14)
+								v.HumanoidRootPart.CanCollide = false
+								v.Head.CanCollide = false
+								v.HumanoidRootPart.CFrame = PosMon
+								if v.Humanoid:FindFirstChild("Animator") then
+									v.Humanoid.Animator:Destroy()
+								end
+								v.Humanoid:ChangeState(11)
+								v.Humanoid:ChangeState(14)
+								sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+							end
+						end
+					end)
+				end
+			end
+end)
+
+
+
+
+
+
+
+Main:Toggle("Bãi 1 ( Bone ) Ngon",_G.Auto_Farm_Bone,function(value)
+ _G.Auto_Farm_Bone = value
+ _G.click = value
+ StopTween(_G.Auto_Farm_Bone)
+ end)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 	
@@ -3753,4 +3926,1945 @@ end)
 		end
 	end)
 
+Main:Toggle("Bãi 3 ( 2400-2425 ) Tạm Đc",_G.farm3,function(value)
+ _G.farm3 = value
+ _G.click = value
+ StopTween(_G.farm3)
+ end)
 
+	spawn(function()
+ game:GetService("RunService").Heartbeat:Connect(function()
+  pcall(function()
+   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+   if _G.farm3 and StartMagnetBoneMon and (v.Name == "Candy Pirate" or v.Name == "Snow Demon") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 300 then
+   v.HumanoidRootPart.CFrame = PosMonBone
+   v.HumanoidRootPart.CanCollide = false
+   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+   if v.Humanoid:FindFirstChild("Animator") then
+   v.Humanoid.Animator:Destroy()
+   end
+   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+   end
+   end
+   end)
+  end)
+end)
+
+
+
+
+
+
+
+
+spawn(function()
+ while wait() do
+ if _G.farm3 and World3 then
+ pcall(function()
+  if game:GetService("Workspace").Enemies:FindFirstChild("Candy Pirate") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Demon")  then
+  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+  if v.Name == "Candy Pirate" or v.Name == "Snow Demon"  then
+  if v.Humanoid.Health > 0 then
+  repeat wait()
+  AutoHaki()
+  EquipWeapon(_G.Select_Weapon)
+  StartMagnetBoneMon = true
+  v.HumanoidRootPart.CanCollide = false
+  v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+  PosMonBone = v.HumanoidRootPart.CFrame
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  game:GetService'VirtualUser':CaptureController()
+  game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+  until _G.farm3 == false or not v.Parent or v.Humanoid.Health <= 0
+  end
+  end
+  end
+  else
+   StartMagnetBoneMon = false
+  for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+  if v.Name == "Candy Pirate" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  elseif v.Name == "Snow Demon" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  end
+  end
+  topos(CFrame.new(-1068.36743, 14.9015837, -14466.7695, 0.951788664, 0.295479625, 0.0824019462, -0.297645211, 0.9545573, 0.0150860008, -0.0741997808, -0.0388852358, 0.996484995))
+  end
+  end)
+ end
+ end
+ end)
+
+
+
+
+
+
+
+
+Main:Toggle("Bãi 4 ( 2300-2375 ) Tạm Đc",_G.farm4,function(value)
+ _G.farm4 = value
+ _G.click = value
+ StopTween(_G.farm4)
+ end)
+
+	spawn(function()
+ game:GetService("RunService").Heartbeat:Connect(function()
+  pcall(function()
+   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+   if _G.farm4 and StartMagnetBoneMon and (v.Name == "Cocoa Warrior" or v.Name == "Candy Rebel") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 300 then
+   v.HumanoidRootPart.CFrame = PosMonBone
+   v.HumanoidRootPart.CanCollide = false
+   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+   if v.Humanoid:FindFirstChild("Animator") then
+   v.Humanoid.Animator:Destroy()
+   end
+   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+   end
+   end
+   end)
+  end)
+end)
+
+
+
+
+
+
+
+
+spawn(function()
+ while wait() do
+ if _G.farm4 and World3 then
+ pcall(function()
+  if game:GetService("Workspace").Enemies:FindFirstChild("Candy Rebel") or game:GetService("Workspace").Enemies:FindFirstChild("Cocoa Warrior")  then
+  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+  if v.Name == "Candy Rebel" or v.Name == "Cocoa Warrior"  then
+  if v.Humanoid.Health > 0 then
+  repeat wait()
+  AutoHaki()
+  EquipWeapon(_G.Select_Weapon)
+  StartMagnetBoneMon = true
+  v.HumanoidRootPart.CanCollide = false
+  v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+  PosMonBone = v.HumanoidRootPart.CFrame
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  game:GetService'VirtualUser':CaptureController()
+  game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+  until _G.farm4 == false or not v.Parent or v.Humanoid.Health <= 0
+  end
+  end
+  end
+  else
+   StartMagnetBoneMon = false
+  for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+  if v.Name == "Cocoa Warrior" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  elseif v.Name == "Candy Rebel" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  end
+  end
+  topos(CFrame.new(213.148376, 126.898636, -12605.1973, -0.83479178, -0.237668604, -0.496625036, -0.291682541, 0.955952287, 0.0328102373, 0.466951817, 0.17224656, -0.867344856))
+  end
+  end)
+ end
+ end
+end)
+
+
+
+
+Main:Toggle("Bãi 5 ( 2125-2150 )  Tạm Đc",_G.farm5,function(value)
+ _G.farm5 = value
+ _G.click = value
+ StopTween(_G.farm5)
+ end)
+
+	spawn(function()
+ game:GetService("RunService").Heartbeat:Connect(function()
+  pcall(function()
+   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+   if _G.farm5 and StartMagnetBoneMon and (v.Name == "Ice Cream Chef" or v.Name == "Ice Cream Commander") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 300 then
+   v.HumanoidRootPart.CFrame = PosMonBone
+   v.HumanoidRootPart.CanCollide = false
+   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+   if v.Humanoid:FindFirstChild("Animator") then
+   v.Humanoid.Animator:Destroy()
+   end
+   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+   end
+   end
+   end)
+  end)
+end)
+
+
+
+
+
+
+
+
+spawn(function()
+ while wait() do
+ if _G.farm5 and World3 then
+ pcall(function()
+  if game:GetService("Workspace").Enemies:FindFirstChild("Ice Cream Commander") or game:GetService("Workspace").Enemies:FindFirstChild("Ice Cream Chef")  then
+  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+  if v.Name == "Ice Cream Commander" or v.Name == "Ice Cream Chef"  then
+  if v.Humanoid.Health > 0 then
+  repeat wait()
+  AutoHaki()
+  EquipWeapon(_G.Select_Weapon)
+  StartMagnetBoneMon = true
+  v.HumanoidRootPart.CanCollide = false
+  v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+  PosMonBone = v.HumanoidRootPart.CFrame
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  game:GetService'VirtualUser':CaptureController()
+  game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+  until _G.farm5 == false or not v.Parent or v.Humanoid.Health <= 0
+  end
+  end
+  end
+  else
+   StartMagnetBoneMon = false
+  for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+  if v.Name == "Ice Cream Commander" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  elseif v.Name == "Ice Cream Chef" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  end
+  end
+  topos(CFrame.new(-568.242432, 126.436852, -11120.3252, 0.714386225, 0.0550739393, -0.697580934, 0.0623825677, 0.987916172, 0.141881272, 0.696965277, -0.144874915, 0.702317953))
+  end
+  end)
+ end
+ end
+ end)
+
+
+
+
+
+
+Main:Toggle("Bãi 6 ( 2075-2100 )  Tạm Đc",_G.farm6,function(value)
+ _G.farm6 = value
+ _G.click = value
+ StopTween(_G.farm6)
+ end)
+
+	spawn(function()
+ game:GetService("RunService").Heartbeat:Connect(function()
+  pcall(function()
+   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+   if _G.farm6 and StartMagnetBoneMon and (v.Name == "Peanut Scout" or v.Name == "Peanut President") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 300 then
+   v.HumanoidRootPart.CFrame = PosMonBone
+   v.HumanoidRootPart.CanCollide = false
+   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+   if v.Humanoid:FindFirstChild("Animator") then
+   v.Humanoid.Animator:Destroy()
+   end
+   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+   end
+   end
+   end)
+  end)
+end)
+
+
+
+
+
+
+
+
+spawn(function()
+ while wait() do
+ if _G.farm6 and World3 then
+ pcall(function()
+  if game:GetService("Workspace").Enemies:FindFirstChild("Peanut Scout") or game:GetService("Workspace").Enemies:FindFirstChild("Peanut President")  then
+  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+  if v.Name == "Peanut Scout" or v.Name == "Peanut President"  then
+  if v.Humanoid.Health > 0 then
+  repeat wait()
+  AutoHaki()
+  EquipWeapon(_G.Select_Weapon)
+  StartMagnetBoneMon = true
+  v.HumanoidRootPart.CanCollide = false
+  v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+  PosMonBone = v.HumanoidRootPart.CFrame
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  game:GetService'VirtualUser':CaptureController()
+  game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+  until _G.farm6 == false or not v.Parent or v.Humanoid.Health <= 0
+  end
+  end
+  end
+  else
+   StartMagnetBoneMon = false
+  for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+  if v.Name == "Peanut President" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  elseif v.Name == "Peanut Scout" then
+  topos(v.HumanoidRootPart.CFrame * MethodFarm)
+  end
+  end
+  topos(CFrame.new(-2134.28198, 70.2586365, -10351.7373, -0.465537071, 0.537135005, 0.703392625, -0.495871872, 0.5, -0.710007787, -0.73306632, -0.679327667, 0.0335815549))
+  end
+  end)
+ end
+ end
+ end)
+
+
+
+
+
+
+
+
+
+
+
+
+local FullMoon = Race:Label("Check Moon")
+        task.spawn(function()
+            while task.wait() do
+                pcall(function()
+                    if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
+                        FullMoon:Set("🌑 : Full Moon 100%")
+                    elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
+                        FullMoon:Set("🌒 : Full Moon 75%")
+                    elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
+                        FullMoon:Set("🌓 : Full Moon 50%")
+                    elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
+                        FullMoon:Set("🌗 : Full Moon 25%")
+                    elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
+                        FullMoon:Set("🌖 : Full Moon 15%")
+                    else
+                        FullMoon:Set("🌚 : Full Moon 0%")
+                    end
+                end)
+            end
+        end)
+
+Race:Button("Dịch Chuyển Đến Cổng Tộc Của Bản Thân",function()
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.01)
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.001)
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.001)
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.0001)
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.00001)
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+    wait(0.000001)
+     Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+    wait(0.0000001)
+       Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+       wait(0.0000001)
+          Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+          wait(0.1)
+             Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+             wait(0.1)
+             Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875) 
+        wait(0.6)
+				if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+                two(CFrame.new(29221.822265625, 14890.9755859375, -205.99114990234375))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+                two(CFrame.new(28960.158203125, 14919.6240234375, 235.03948974609375))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
+                two(CFrame.new(28231.17578125, 14890.9755859375, -211.64173889160156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+                two(CFrame.new(28502.681640625, 14895.9755859375, -423.7279357910156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+                two(CFrame.new(28674.244140625, 14890.6767578125, 445.4310607910156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+                two(CFrame.new(29012.341796875, 14890.9755859375, -380.1492614746094))
+                          end
+			   	end)
+
+					  	
+
+
+
+
+
+
+
+
+
+
+
+
+ Race:Button("Dịch Chuyển Đến Chỗ Gắn Gear",function()
+for _,v in next, workspace:GetDescendants() do
+    if v.Name == "Prompt" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+    end
+    end
+end)
+ 
+ 
+  
+  Race:Seperator("Auto Win Ải V4")
+  Race:Toggle("Win Ải All Tộc",_G.winv4,function(value)
+ _G.winv4 = value
+ StopTween(_G.winv4)
+end)
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.winv4 then
+				if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+							pcall(function()
+								repeat wait(.01)
+									v.Humanoid.Health = 0
+									v.HumanoidRootPart.CanCollide = false
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.winv4 or not v.Parent or v.Humanoid.Health <= 0
+							end)
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+				for _,v in next, workspace:GetDescendants() do
+                     if v.Name == "FinishPart" then
+                  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                     end
+                     end
+
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+				Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(-20093.4961, 9954.93945, -125.194695, 0.627363682, 1.15070167e-08, 0.778726399, -8.20592732e-08, 1, 5.13325205e-08, -0.778726399, -9.61058788e-08, 0.627363682)
+					
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+							pcall(function()
+								repeat wait(.01)
+									v.Humanoid.Health = 0
+									v.HumanoidRootPart.CanCollide = false
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.winv4 or not v.Parent or v.Humanoid.Health <= 0
+							end)
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+					for _,v in next, workspace:GetDescendants() do
+                     if v.Name == "StartPoint" then
+                  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                end
+               end
+				end
+			end
+        end
+    end)
+end)  
+  
+  
+ 
+
+Race:Toggle("Đánh Sea Beasts Tộc Cá",_G.SeaBeasts1,function(value)
+ _G.SeaBeasts1 = value
+ StopTween(_G.SeaBeasts1)
+end)
+spawn(function()
+    pcall(function()
+        while wait(0.1) do
+            if _G.SeaBeasts1 then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+                for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                if v:FindFirstChild("HumanoidRootPart") then
+                topos(v.HumanoidRootPart.CFrame*CFrame.new(20,450,0))
+               
+			   for i,v in pairs(game:GetService("Workspace").SeaBeasts.SeaBeast1:GetChildren()) do
+						if v.Name ==  "HumanoidRootPart" then
+					two(v.CFrame*CFrame.new(20,450,0))
+					
+					for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Melee" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(0.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(0.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Blox Fruit" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+					
+							wait(0.3)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Sword" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(0.3)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Gun" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.3)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+						
+					
+					
+					
+					
+end
+ end
+  end
+  end
+end
+end
+end)
+end)
+Race:Toggle("Kill Người Chơi",_G.killplayertrain,function(value)
+ _G.killplayertrain = value
+ _G.click = value
+ StopTween(_G.killplayertrain)
+end)
+
+spawn(function()
+    while wait() do
+        if _G.killplayertrain then
+-- Lấy danh sách tất cả người chơi trong trò chơi
+if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+  local args = {
+   [1] = "Buso"
+  }
+  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+  end
+EquipWeapon(_G.Select_Weapon)
+if game.Players.LocalPlayer.Character.Humanoid.Health >= 5000 then
+local players = game:GetService("Players"):GetPlayers()
+
+-- Người chơi mà bạn muốn di chuyển đến
+local targetPlayer = nil
+local minDistance = 400
+
+-- Lấy người chơi gần nhất
+local closestDistance = math.huge
+for _, player in pairs(players) do
+    if player ~= game.Players.LocalPlayer then -- Loại bỏ người chơi hiện tại (bạn)
+        local distance = (player.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        if distance < closestDistance then
+            closestDistance = distance
+            targetPlayer = player
+        end
+end
+end
+
+
+-- Kiểm tra nếu có người chơi gần nhất và khoảng cách nhỏ hơn 200
+if targetPlayer and closestDistance < minDistance then
+    -- Di chuyển người chơi hiện tại đến người chơi gần nhất
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 5, 0) -- Điều chỉnh vector (0, 5, 0) để tránh va chạm
+else
+    print("Không có người chơi gần nhất trong khoảng cách 200 part.")
+end
+end
+end
+end
+end)
+
+  Race:Seperator("Show Acc")
+  Race:Button("Show Acc K Mờ ( Pc )",function()
+        -- Gui to Lua
+
+
+
+
+local ScreenGui = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+local UIStroke = Instance.new("UIStroke")
+local UIGradient = Instance.new("UIGradient")
+local TextLabel_2 = Instance.new("TextLabel")
+local UIStroke_2 = Instance.new("UIStroke")
+local UIGradient_2 = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextLabel.Parent = ScreenGui
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.714958787, 0, 0.784615397, 0)
+TextLabel.Size = UDim2.new(0, 101, 0, 51)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Tên Acc :   "
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 1.000
+TextLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextWrapped = true
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Parent = TextLabel
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 4)), ColorSequenceKeypoint.new(0.34, Color3.fromRGB(7, 243, 255)), ColorSequenceKeypoint.new(0.68, Color3.fromRGB(5, 255, 13)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 234, 2))}
+UIGradient.Parent = UIStroke
+
+TextLabel_2.Parent = TextLabel
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.997744143, 0, 0.0196078438, 0)
+TextLabel_2.Size = UDim2.new(0, 130, 0, 50)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = game.Players.LocalPlayer.Name
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 34.000
+TextLabel_2.TextWrapped = true
+
+UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
+UIStroke_2.Parent = TextLabel_2
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(87, 255, 177)), ColorSequenceKeypoint.new(0.34, Color3.fromRGB(26, 244, 255)), ColorSequenceKeypoint.new(0.67, Color3.fromRGB(255, 182, 253)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(246, 255, 66))}
+UIGradient_2.Parent = UIStroke_2
+
+UIAspectRatioConstraint.Parent = ScreenGui
+UIAspectRatioConstraint.AspectRatio = 1.633
+
+-- Scripts:
+
+local function IJSNJU_fake_script() -- UIGradient.LocalScript 
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(IJSNJU_fake_script)()
+local function TWYWG_fake_script() -- UIGradient_2.Script 
+	local script = Instance.new('Script', UIGradient_2)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(TWYWG_fake_script)()
+
+
+
+
+
+
+
+
+
+
+local click = Instance.new("ScreenGui")
+local TextButton = Instance.new("TextButton")
+local UIStroke = Instance.new("UIStroke")
+local UIGradient = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+click.Name = "click"
+click.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+click.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextButton.Parent = click
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BorderSizePixel = 0
+TextButton.ClipsDescendants = true
+TextButton.Position = UDim2.new(0.395759732, 0, 0.790384591, 0)
+TextButton.Size = UDim2.new(0, 253, 0, 33)
+TextButton.ZIndex = 3
+TextButton.Font = Enum.Font.SourceSans
+TextButton.LineHeight = 1.090
+TextButton.Text = "Click Nếu Có Mảnh Gương"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextScaled = true
+TextButton.TextSize = 19.000
+TextButton.TextWrapped = true
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Thickness = 0.5
+UIStroke.Parent = TextButton
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 73)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(58, 255, 140)), ColorSequenceKeypoint.new(0.63, Color3.fromRGB(57, 245, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient.Parent = UIStroke
+
+UIAspectRatioConstraint.Parent = click
+UIAspectRatioConstraint.AspectRatio = 1.633
+
+-- Scripts:
+
+local function YPRGW_fake_script() -- UIGradient.LocalScript 
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(YPRGW_fake_script)()
+local function LIYTYB_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		-- Gui to Lua
+-- Version: 3.6
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageLabel = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local ImageButton = Instance.new("ImageButton")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.396834195, 0, 0.567307711, 0)
+ImageLabel.Size = UDim2.new(0, 107, 0, 82)
+ImageLabel.Image = "http://www.roblox.com/asset/?id=14487530170"
+ImageLabel.ScaleType = Enum.ScaleType.Fit
+
+UICorner.CornerRadius = UDim.new(0, 15)
+UICorner.Parent = ImageLabel
+
+ImageButton.Parent = ImageLabel
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.BackgroundTransparency = 1.000
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.6363343, 0, 0, 0)
+ImageButton.Size = UDim2.new(0, 26, 0, 25)
+ImageButton.Image = "rbxassetid://9545003266"
+
+UICorner_2.Parent = ImageButton
+
+UIAspectRatioConstraint.Parent = ScreenGui
+UIAspectRatioConstraint.AspectRatio = 1.633
+
+-- Scripts:
+
+local function LXUKOG_fake_script() -- ImageButton.LocalScript 
+	local script = Instance.new('LocalScript', ImageButton)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent:Destroy()
+	end)
+end
+coroutine.wrap(LXUKOG_fake_script)()
+local function NPDDTT_fake_script() -- ImageLabel.LocalScript 
+	local script = Instance.new('LocalScript', ImageLabel)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(NPDDTT_fake_script)()
+
+		wait(1)
+		script.Parent:Destroy()
+	end)
+end
+coroutine.wrap(LIYTYB_fake_script)()
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.SafeZone:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.HP:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy:Destroy()
+ 
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0, 10, 0.90299999, 0)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.RaceEnergy.Position = UDim2.new(0, 10, 0.97299999, 0)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0.00999999978, 0, 0.79400003, 0)
+
+
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Black:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Bar:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Exp:Destroy()
+
+
+local ScreenGui = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local UIGradient = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextLabel.Parent = ScreenGui
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.787, 0,-0.03, 0)
+TextLabel.Size = UDim2.new(0.258796811, 0, 0.0200803205, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Race V4"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 29.000
+TextLabel.TextTransparency = 0.030
+TextLabel.TextWrapped = true
+
+UICorner.Parent = TextLabel
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Parent = TextLabel
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135, 255, 145)), ColorSequenceKeypoint.new(0.18, Color3.fromRGB(255, 247, 130)), ColorSequenceKeypoint.new(0.37, Color3.fromRGB(249, 158, 255)), ColorSequenceKeypoint.new(0.58, Color3.fromRGB(120, 210, 204)), ColorSequenceKeypoint.new(0.87, Color3.fromRGB(243, 98, 93)), ColorSequenceKeypoint.new(0.97, Color3.fromRGB(85, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient.Parent = UIStroke
+
+UIAspectRatioConstraint.Parent = TextLabel
+UIAspectRatioConstraint.AspectRatio = 22.800
+
+-- Scripts:
+
+local function AJXXA_fake_script() -- UIGradient.LocalScript 
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(AJXXA_fake_script)()
+
+
+
+local cac = require(game:GetService("Players").LocalPlayer.PlayerGui.Main.UIController.Inventory)
+local Inventory = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")
+local Items = {}
+local RaityLevel = {"Mythical","Legendary","Rare","Uncommon",}
+local RaityColor =  {
+    ["Uncommon"] = Color3.fromRGB(92, 140, 211),
+    ["Rare"] =  Color3.fromRGB(140, 82, 255),
+    ["Legendary"] = Color3.fromRGB(213, 43, 228) ,
+    ["Mythical"] =  Color3.fromRGB(238, 47, 50) 
+}
+function GetRaity(color)
+    for k,v in pairs(RaityColor) do 
+        if v==color then return k end
+    end
+end
+
+for k,v in pairs(Inventory) do 
+    Items[v.Name] = v
+end
+
+local total = #getupvalue(cac.UpdateRender,4)
+local rac = {}
+local allitem = {}
+local total2 = 0
+while total2<total do 
+    local i = 0
+    while i < 25000 and total2<total do 
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.CanvasPosition = Vector2.new(0,i)
+        for k,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.Frame:GetChildren()) do 
+            if v:IsA("Frame") and not rac[v.ItemName.Text] and v.ItemName.Visible==true then 
+                local vaihuhu = GetRaity(v.Background.BackgroundColor3)
+                if vaihuhu then
+                    print("Rac")
+                    if not allitem[vaihuhu] then 
+                        allitem[vaihuhu] = {}
+                    end
+                    table.insert(allitem[vaihuhu],v:Clone())
+                end
+                total2=total2+1
+                rac[v.ItemName.Text] = true
+            end
+        end
+        i=i+20
+    end
+    wait()
+end
+function GetXY(vec) 
+    return vec*100
+end
+
+local tvk = Instance.new("UIListLayout")
+tvk.FillDirection = Enum.FillDirection.Vertical
+tvk.SortOrder = 2
+tvk.Padding = UDim.new(0,20)
+
+local Left = Instance.new("Frame",game.Players.LocalPlayer.PlayerGui.BubbleChat)
+Left.BackgroundTransparency = 1
+Left.Size = UDim2.new(.5,0,1,0) --HÀNG
+tvk.Parent = Left
+
+local Right = Instance.new("Frame",game.Players.LocalPlayer.PlayerGui.BubbleChat)
+Right.BackgroundTransparency = 1
+Right.Size = UDim2.new(.5,0,1,0)   -- HÀNG FRUIT
+Right.Position = UDim2.new(.62,0,0,0)
+Right.Name = "Right"
+tvk:Clone().Parent = Right
+local bucac
+for k,v in pairs(allitem) do 
+    local cac = Instance.new("Frame",Left)
+    cac.BackgroundTransparency = 1
+    cac.Size = UDim2.new(.62,0,0,0) 
+    cac.LayoutOrder = table.find(RaityLevel,k)
+    
+    
+  
+
+    local cac2 = Instance.new("Frame",Right)
+    cac2.BackgroundTransparency = 1
+    cac2.Size = UDim2.new(0.6,0,0,0) 
+    cac2.LayoutOrder = table.find(RaityLevel,k)
+    
+     local tvk = Instance.new("UIGridLayout",cac)
+    tvk.CellPadding = UDim2.new(.005,0,.0) -- KHOẢNG CÁCH NGANG
+    tvk.CellSize =  UDim2.new(0,56,0,56) -- to nhỏ
+    tvk.FillDirectionMaxCells = 100
+    tvk.FillDirection = Enum.FillDirection.Horizontal
+
+    local ccc = tvk:Clone()
+    ccc.Parent = cac2
+    for k,v in pairs(v) do 
+        if Items[v.ItemName.Text] and Items[v.ItemName.Text].Mastery then 
+            if v.ItemLine2.Text~="Accessory" then 
+                bucac = v.ItemName:Clone()
+                bucac.BackgroundTransparency = 1
+                bucac.TextSize = 10
+                bucac.TextXAlignment  = 2
+                bucac.TextYAlignment  = 2
+                bucac.ZIndex  = 5
+                bucac.Text = Items[v.ItemName.Text].Mastery
+                bucac.Size = UDim2.new(.35,0,.35,0)
+                bucac.Position = UDim2.new(.5,0,.5,0)
+                bucac.Parent = v
+            end
+            v.Parent = cac
+        elseif v.ItemLine2.Text == "Blox Fruit" then 
+            v.Parent = cac2
+        end
+    end
+    cac.AutomaticSize = 3.5
+    cac2.AutomaticSize = 3.5
+end
+
+local MeleeG = Instance.new("Frame",Right)
+MeleeG.BackgroundTransparency = 1
+MeleeG.Size = UDim2.new(1,0,0,0) 
+MeleeG.LayoutOrder = table.find(RaityLevel,k)
+MeleeG.AutomaticSize=2
+MeleeG.LayoutOrder = 100
+local tvk = Instance.new("UIGridLayout",MeleeG)
+tvk.CellPadding = UDim2.new(.005,0,.005,0)
+tvk.CellSize =  UDim2.new(0,70,0,70)
+tvk.FillDirectionMaxCells = 100
+tvk.FillDirection = Enum.FillDirection.Horizontal
+local ListHuhu = {
+    ["Superhuman"] = Vector2.new(3,2),
+    ["DeathStep"] = Vector2.new(4,3),
+    ["ElectricClaw"] = Vector2.new(2,0),
+    ["SharkmanKarate"] = Vector2.new(0,0),
+    ["DragonTalon"] = Vector2.new(1,5),
+    ["Godhuman"] = "rbxassetid://10338473987"
+}
+local nguu = {}
+function GetNext() end
+local Listcaiditconmemayskidconcaca = {}
+local buda
+
+for k,v in pairs(ListHuhu) do
+    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"..k,true) == 1 then 
+        local huhu = Instance.new("ImageLabel",MeleeG)
+        if type(v)=="string" then 
+            huhu.Image = v
+        else
+            huhu.Image = "rbxassetid://9945562382"
+            huhu.ImageRectSize = Vector2.new(100,100)
+            huhu.ImageRectOffset = v*100
+        end 
+        Listcaiditconmemayskidconcaca[k] = huhu
+        table.insert(nguu,k)
+    end
+end
+buda = 1
+function TimKiemItemNehuhu(item)
+    for k,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v.Name:gsub(" ","") == item then 
+            return v
+        end
+    end
+end
+spawn(function() 
+    local a = #nguu
+    local bucu = 0
+    while bucu < a do 
+        for k,v in pairs(Listcaiditconmemayskidconcaca) do 
+            if not v:FindFirstChild("Ditme") then 
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"..k) 
+                wait(.1)
+                local v2 = TimKiemItemNehuhu(k)
+                if v2 then 
+                    v2:WaitForChild("Level")
+                    local Ditme = bucac:Clone()
+                    Ditme.Name = "Ditme"
+                    Ditme.BackgroundTransparency = 1
+                    Ditme.TextSize = 10
+                    Ditme.TextXAlignment  = 2
+                    Ditme.TextYAlignment  = 2
+                    Ditme.ZIndex  = 5
+                    Ditme.Text = v2.Level.Value
+                    Ditme.Size = UDim2.new(.5,0,.5,0)
+                    Ditme.Position = UDim2.new(.5,0,.5,0)
+                    Ditme.Parent = v
+                    bucu=bucu+1
+                end
+            end
+        end
+        wait()
+    end
+
+end)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = true
+repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.TopContainer.Frame:FindFirstChild("Z")
+local rac = game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler:Clone()
+rac.LayoutOrder = 101
+game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = false
+
+rac.Parent = Right
+rac.Size = UDim2.new(1,0,0.3,0)
+function formatNumber(v)
+    return tostring(v):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+end
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.HP.Visible = true
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.HP:Destroy()
+end)
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy.Visible = true
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy:Destroy()
+end)
+for k,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main:GetChildren()) do 
+    if v:IsA("ImageButton") then 
+        v.Visible = false
+    end
+end
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.Compass:Destroy()
+end)
+local thieunang = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
+thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
+thieunang.Position = UDim2.new(0.00999999999,6,0.845,0)
+local n = formatNumber(game.Players.LocalPlayer.Data.Fragments.Value)
+thieunang.Text = "ƒ"..n
+print("Done")
+
+end)
+ 
+ Race:Button("Show Acc K Mờ ( Pe )",function()
+game:GetService("Players").LocalPlayer.PlayerGui.Notifications:Destroy()
+local click = Instance.new("ScreenGui")
+local TextButton = Instance.new("TextButton")
+local UIStroke = Instance.new("UIStroke")
+local UIGradient = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+click.Name = "click"
+click.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+click.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextButton.Parent = click
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BorderSizePixel = 0
+TextButton.ClipsDescendants = true
+TextButton.Position = UDim2.new(0.387922704, 0, 0.712606788, 0)
+TextButton.Size = UDim2.new(0, 80, 0, 33)
+TextButton.ZIndex = 3
+TextButton.Font = Enum.Font.SourceSans
+TextButton.LineHeight = 1.090
+TextButton.Text = "Click Nếu Có Mảnh Gương"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextScaled = true
+TextButton.TextSize = 19.000
+TextButton.TextWrapped = true
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Thickness = 0.5
+UIStroke.Parent = TextButton
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 73)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(58, 255, 140)), ColorSequenceKeypoint.new(0.63, Color3.fromRGB(57, 245, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient.Parent = UIStroke
+
+UIAspectRatioConstraint.Parent = click
+UIAspectRatioConstraint.AspectRatio = 1.633
+
+-- Scripts:
+
+local function HKXIQ_fake_script() -- UIGradient.LocalScript 
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(HKXIQ_fake_script)()
+local function PAWPQFG_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		-- Gui to Lua
+-- Version: 3.6
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageLabel = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local ImageButton = Instance.new("ImageButton")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.345110148, 0, 0.503166199, 0)
+ImageLabel.Size = UDim2.new(0.188844323, 0, 0.176107258, 0)
+ImageLabel.Image = "http://www.roblox.com/asset/?id=14487530170"
+ImageLabel.ScaleType = Enum.ScaleType.Fit
+
+UICorner.CornerRadius = UDim.new(0, 15)
+UICorner.Parent = ImageLabel
+
+ImageButton.Parent = ImageLabel
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.BackgroundTransparency = 1.000
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.564518332, 0, 0, 0)
+ImageButton.Size = UDim2.new(0, 26, 0, 25)
+ImageButton.Image = "rbxassetid://9545003266"
+
+UICorner_2.Parent = ImageButton
+
+UIAspectRatioConstraint.Parent = ScreenGui
+UIAspectRatioConstraint.AspectRatio = 1.633
+
+-- Scripts:
+
+local function FEURO_fake_script() -- ImageButton.LocalScript 
+	local script = Instance.new('LocalScript', ImageButton)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent:Destroy()
+	end)
+end
+coroutine.wrap(FEURO_fake_script)()
+local function TVNJLBF_fake_script() -- ImageLabel.LocalScript 
+	local script = Instance.new('LocalScript', ImageLabel)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(TVNJLBF_fake_script)()
+
+		wait(1)
+		script.Parent:Destroy()
+	end)
+end
+coroutine.wrap(PAWPQFG_fake_script)()
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.SafeZone:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.HP:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy:Destroy()
+ 
+
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Black:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Bar:Destroy()
+ game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Exp:Destroy()
+
+local ScreenGui = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local UIGradient = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextLabel.Parent = ScreenGui
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.787, 0,-0.03, 0)
+TextLabel.Size = UDim2.new(0.258796811, 0, 0.0200803205, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Master Hub"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 29.000
+TextLabel.TextTransparency = 0.030
+TextLabel.TextWrapped = true
+
+UICorner.Parent = TextLabel
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Parent = TextLabel
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135, 255, 145)), ColorSequenceKeypoint.new(0.18, Color3.fromRGB(255, 247, 130)), ColorSequenceKeypoint.new(0.37, Color3.fromRGB(249, 158, 255)), ColorSequenceKeypoint.new(0.58, Color3.fromRGB(120, 210, 204)), ColorSequenceKeypoint.new(0.87, Color3.fromRGB(243, 98, 93)), ColorSequenceKeypoint.new(0.97, Color3.fromRGB(85, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient.Parent = UIStroke
+
+UIAspectRatioConstraint.Parent = TextLabel
+UIAspectRatioConstraint.AspectRatio = 22.800
+
+-- Scripts:
+
+local function AJXXA_fake_script() -- UIGradient.LocalScript 
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(AJXXA_fake_script)()
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines") 
+
+
+local cac = require(game:GetService("Players").LocalPlayer.PlayerGui.Main.UIController.Inventory)
+local Inventory = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")
+local Items = {}
+local RaityLevel = {"Mythical","Legendary","Rare","Uncommon",}
+local RaityColor =  {
+    ["Uncommon"] = Color3.fromRGB(92, 140, 211),
+    ["Rare"] =  Color3.fromRGB(140, 82, 255),
+    ["Legendary"] = Color3.fromRGB(213, 43, 228) ,
+    ["Mythical"] =  Color3.fromRGB(238, 47, 50)
+}
+function GetRaity(color)
+    for k,v in pairs(RaityColor) do 
+        if v==color then return k end
+    end
+end
+
+for k,v in pairs(Inventory) do 
+    Items[v.Name] = v
+end
+
+local total = #getupvalue(cac.UpdateRender,4)
+local rac = {}
+local allitem = {}
+local total2 = 0
+while total2<total do 
+    local i = 0
+    while i < 25000 and total2<total do
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.CanvasPosition = Vector2.new(0,i)
+
+        for k,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.Frame:GetChildren()) do 
+            
+            if v:IsA("Frame") and not rac[v.ItemName.Text] and v.ItemName.Visible==true then 
+                local vaihuhu = GetRaity(v.Background.BackgroundColor3)
+                if vaihuhu then
+                    print("Rac")
+                    if not allitem[vaihuhu] then 
+                        allitem[vaihuhu] = {}
+                    end
+                    table.insert(allitem[vaihuhu],v:Clone())
+                end
+                total2=total2+1
+                rac[v.ItemName.Text] = true
+            end
+        end
+        i=i+20
+    end
+    wait()
+end
+function GetXY(vec) 
+    return vec*100
+end
+
+local tvk = Instance.new("UIListLayout")
+tvk.FillDirection = Enum.FillDirection.Vertical
+tvk.SortOrder = 2
+tvk.Padding = UDim.new(0,20)
+
+local Left = Instance.new("Frame",game.Players.LocalPlayer.PlayerGui.BubbleChat)
+Left.BackgroundTransparency = 1
+Left.Size = UDim2.new(.55,0,1,0) 
+tvk.Parent = Left
+
+local Right = Instance.new("Frame",game.Players.LocalPlayer.PlayerGui.BubbleChat)
+Right.BackgroundTransparency = 1
+Right.Size = UDim2.new(.5,0,1,0) 
+Right.Position = UDim2.new(.62,0,0,0)
+Right.Name = "Right"
+tvk:Clone().Parent = Right
+local bucac
+for k,v in pairs(allitem) do 
+    local cac = Instance.new("Frame",Left)
+    cac.BackgroundTransparency = 1
+    cac.Size = UDim2.new(0.6,0,0,0) 
+    cac.LayoutOrder = table.find(RaityLevel,k)
+
+    local cac2 = Instance.new("Frame",Right)
+    cac2.BackgroundTransparency = 1
+    cac2.Size = UDim2.new(0.6,0,0,0) 
+    cac2.LayoutOrder = table.find(RaityLevel,k)
+    
+     local tvk = Instance.new("UIGridLayout",cac)
+    tvk.CellPadding = UDim2.new(.005,0,.0,0)
+    tvk.CellSize =  UDim2.new(0,33,0,33) -- to nhỏ
+    tvk.FillDirectionMaxCells = 100
+    tvk.FillDirection = Enum.FillDirection.Horizontal
+
+    local ccc = tvk:Clone()
+    ccc.Parent = cac2
+    for k,v in pairs(v) do 
+        if Items[v.ItemName.Text] and Items[v.ItemName.Text].Mastery then 
+            if v.ItemLine2.Text~="Accessory" then 
+                bucac = v.ItemName:Clone()
+                bucac.BackgroundTransparency = 1
+                bucac.TextSize = 10
+                bucac.TextXAlignment  = 1
+                bucac.TextYAlignment  = 1
+                bucac.ZIndex  = 5
+                bucac.Text = Items[v.ItemName.Text].Mastery
+                bucac.Size = UDim2.new(.30,0,.30,0)
+                bucac.Position = UDim2.new(.5,0,.5,0)
+                bucac.Parent = v
+            end
+            v.Parent = cac
+        elseif v.ItemLine2.Text == "Blox Fruit" then 
+            v.Parent = cac2
+        end
+    end
+    cac.AutomaticSize = 3.5
+    cac2.AutomaticSize = 3.5
+end
+
+local MeleeG = Instance.new("Frame",Right)
+MeleeG.BackgroundTransparency = 1
+MeleeG.Size = UDim2.new(1,0,0,0) 
+MeleeG.LayoutOrder = table.find(RaityLevel,k)
+MeleeG.AutomaticSize=2
+MeleeG.LayoutOrder = 100
+local tvk = Instance.new("UIGridLayout",MeleeG)
+tvk.CellPadding = UDim2.new(.005,0,.005,0)
+tvk.CellSize =  UDim2.new(0,33,0,33)
+tvk.FillDirectionMaxCells = 100
+tvk.FillDirection = Enum.FillDirection.Horizontal
+local ListHuhu = {
+    ["Superhuman"] = Vector2.new(3,2),
+    ["DeathStep"] = Vector2.new(4,3),
+    ["ElectricClaw"] = Vector2.new(2,0),
+    ["SharkmanKarate"] = Vector2.new(0,0),
+    ["DragonTalon"] = Vector2.new(1,5),
+    ["Godhuman"] = "rbxassetid://10338473987"
+}
+local nguu = {}
+function GetNext() end
+local Listcaiditconmemayskidconcaca = {}
+local buda
+
+for k,v in pairs(ListHuhu) do
+    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"..k,true) == 1 then 
+        local huhu = Instance.new("ImageLabel",MeleeG)
+        if type(v)=="string" then 
+            huhu.Image = v
+        else
+            huhu.Image = "rbxassetid://9945562382"
+            huhu.ImageRectSize = Vector2.new(100,100)
+            huhu.ImageRectOffset = v*100
+        end 
+        Listcaiditconmemayskidconcaca[k] = huhu
+        table.insert(nguu,k)
+    end
+end
+buda = 1
+function TimKiemItemNehuhu(item)
+    for k,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v.Name:gsub(" ","") == item then 
+            return v
+        end
+    end
+end
+spawn(function() 
+    local a = #nguu
+    local bucu = 0
+    while bucu < a do 
+        for k,v in pairs(Listcaiditconmemayskidconcaca) do 
+            if not v:FindFirstChild("Ditme") then 
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"..k) 
+                wait(.1)
+                local v2 = TimKiemItemNehuhu(k)
+                if v2 then 
+                    v2:WaitForChild("Level")
+                    local Ditme = bucac:Clone()
+                    Ditme.Name = "Ditme"
+                    Ditme.BackgroundTransparency = 1
+                    Ditme.TextSize = 10
+                    Ditme.TextXAlignment  = 2
+                    Ditme.TextYAlignment  = 2
+                    Ditme.ZIndex  = 5
+                    Ditme.Text = v2.Level.Value
+                    Ditme.Size = UDim2.new(.5,0,.5,0)
+                    Ditme.Position = UDim2.new(.5,0,.5,0)
+                    Ditme.Parent = v
+                    bucu=bucu+1
+                end
+            end
+        end
+        wait()
+    end
+
+end)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = true
+repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.TopContainer.Frame:FindFirstChild("Z")
+local rac = game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler:Clone()
+rac.LayoutOrder = 101
+game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = false
+
+rac.Parent = Right
+rac.Size = UDim2.new(1,0,0.3,0)
+function formatNumber(v)
+    return tostring(v):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+end
+local thieunang = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
+thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
+thieunang.Position = UDim2.new(0.00999999999,6,0.835,0)
+local n = formatNumber(game.Players.LocalPlayer.Data.Fragments.Value)
+thieunang.Text = "ƒ"..n
+print("Done")
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton.Visible = false
+  -- game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
+end)
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.HP.Visible = false
+    --game:GetService("Players").LocalPlayer.PlayerGui.Main.HP:Destroy()
+end)
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy.Visible = false
+    --game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy:Destroy()
+end)
+for k,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main:GetChildren()) do 
+    if v:IsA("ImageButton") then 
+        v.Visible = false
+    end
+end
+pcall(function() 
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.Compass:Destroy()
+end)
+
+wait(1)
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0, 10, 0.90299999, 0)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.RaceEnergy.Position = UDim2.new(0, 10, 0.97299999, 0)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0.00999999999, 0, 0.765, 0)
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Destroy()
+end)
+ 
+ 
+ 
+ 
+   Main:Seperator("Buy + Bật Tộc")
+  
+  Main:Toggle("Tự Động Bật V4",_G.Auto_Farm_Bone3,function(value)
+ _G.Auto_Farm_Bone3 = value
+ StopTween(_G.Auto_Farm_Bone3)
+ spawn(function()
+    pcall(function()
+    while wait(0.1) do 
+    if _G.Auto_Farm_Bone3  then
+local args = {
+    [1] = true
+}
+game:GetService("Players").LocalPlayer.Backpack.Awakening.RemoteFunction:InvokeServer(unpack(args))
+
+end
+end
+end)
+end)
+  end) 
+  
+
+Main:Toggle("Tự Động Mua Train",_G.Auto_Farm_Bone4,function(value)
+ _G.Auto_Farm_Bone4 = value
+ StopTween(_G.Auto_Farm_Bone4)
+end)
+spawn(function()
+    pcall(function()
+        while wait(0.1) do
+            if _G.Auto_Farm_Bone4 then
+    local args = {
+    [1] = true
+}
+
+local args = {
+    [1] = "UpgradeRace",
+    [2] = "Buy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(args))
+            end
+end 
+end)  
+end)
+
+
+
+
+
+
+Main:Button("Dịch Chuyển Đến Npc Mua Train",function()
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+  Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+  topos(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375))
+end)
+
+
+
+if World2 or World3 then
+Dungeon:Seperator("Use in Dungeon Only!")
+
+chip = {
+	"Flame", 
+	"Ice", 
+	"Quake", 
+	"Light",
+	"Dark",
+	"String",
+	"Rumble",
+	"Magma",
+	"Human: Buddha",
+	"Sand",
+	"Bird: Phoenix"
+}
+
+Dungeon:Dropdown("Chip Cần Mua",chip,function(value)
+ _G.Select_Dungeon = value
+end)
+
+Dungeon:Toggle("Mua Chip Đã Chọn",_G.Auto_Buy_Chips_Dungeon,function(value)
+ _G.Auto_Buy_Chips_Dungeon = value
+end)
+
+
+spawn(function()
+    while wait() do
+		if _G.Auto_Buy_Chips_Dungeon then
+			pcall(function()
+				local args = {
+					[1] = "RaidsNpc",
+					[2] = "Select",
+					[3] = _G.Select_Dungeon
+				}
+				
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end)
+		end
+    end
+end)
+
+
+
+
+Dungeon:Toggle("Auto Lấy Fruit Dưới 1M",_G.Autofruit,function(value)
+ _G.Autofruit = value
+end)
+spawn(function()
+    while wait(10) do
+        pcall(function()
+     if _G.Autofruit then
+         -- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Kilo-Kilo"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+-- Script generated by SimpleSpy - credits to exx#9394
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spin-Spin"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Chop-Chop"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+-- Script generated by SimpleSpy - credits to exx#9394
+
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spring-Spring"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Bomb-Bomb"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Smoke-Smoke"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spike-Spike"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Flame-Flame"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Falcon-Falcon"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Ice-Ice"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Sand-Sand"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Dark-Dark"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Revive-Revive"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Diamond-Diamond"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Light-Light"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Rubber-Rubber"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Barrier-Barrier"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+end)
+end
+end)
+
+
+
+
+
+
+
+
+
+
+Dungeon:Toggle("Tự Động Vào Và Win Raid",_G.Auto_StartRaid,function(value)
+ _G.Auto_StartRaid = value
+ _G.Kill_Aura = value
+end)
+
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+            if _G.Auto_StartRaid  then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                    if not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                        if World2 then
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                        elseif World3 then
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+    end)
+
+Dungeon:Toggle("Tự Động Đến Đảo Tiếp Theo",_G.Auto_Next_Island,function(value)
+ _G.Auto_Next_Island = value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Next_Island then
+			if not game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == false then
+				if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+					topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame * CFrame.new(0,70,100))
+				elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+					topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4").CFrame * CFrame.new(0,70,100))
+				elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+					topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3").CFrame * CFrame.new(0,70,100))
+				elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+					topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2").CFrame * CFrame.new(0,70,100))
+				elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+					topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").CFrame * CFrame.new(0,70,100))
+				end
+			end
+        end
+    end
+end)
+
+
+Dungeon:Toggle("Tự Động Thức Tỉnh",_G.Auto_Awake,function(value)
+ _G.Auto_Awake = value 
+end)
+
+
+spawn(function()
+	while wait(.1) do
+		if _G.Auto_Awake then
+			pcall(function()
+				local args = {
+					[1] = "Awakener",
+					[2] = "Check"
+				}
+				
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+				local args = {
+					[1] = "Awakener",
+					[2] = "Awaken"
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end)
+		end
+	end
+end)
+
+  
+  spawn(function()
+    while wait() do
+        if _G.Kill_Aura then
+            for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                    pcall(function()
+                        repeat wait(.001)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+							sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                        until not _G.Kill_Aura  or not v.Parent or v.Humanoid.Health <= 0
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
