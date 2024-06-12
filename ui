@@ -3069,7 +3069,7 @@ end)
 
 _G.Skillzxvb = false
 
-Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
+Main:Toggle("Auto Skill X-V-B", _G.Skillzxvb, function(value)
     _G.Skillzxvb = value
     StopTween(_G.Skillzxvb)
 
@@ -3111,14 +3111,6 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
                 virtualInputManager:SendKeyEvent(false, "B", false, game)
                 virtualInputManager:SendKeyEvent(true, "B", false, game)
 
-               wait(0.5)
-                virtualInputManager:SendKeyEvent(true, "Z", false, game)
-                wait(0.44)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                wait(0.4)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
             end
         end
     end
@@ -3195,7 +3187,7 @@ end
 
 
 
-
+    
 
 
 
@@ -3217,7 +3209,6 @@ end
 
 
  
-
 
 
 
