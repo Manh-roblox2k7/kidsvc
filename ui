@@ -3079,27 +3079,31 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
             if virtualInputManager then
                 -- Simulate pressing the "Z" key
                 virtualInputManager:SendKeyEvent(true, "Z", false, game)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "Z", false, game)
                 wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
                 
                 -- Simulate pressing the "X" key
                 virtualInputManager:SendKeyEvent(true, "X", false, game)
+                  virtualInputManager:SendKeyEvent(true, "X", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "X", false, game)
                 wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
                 
                 -- Simulate pressing the "V" key
                 virtualInputManager:SendKeyEvent(true, "V", false, game)
+                     virtualInputManager:SendKeyEvent(true, "V", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "V", false, game)
                 wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
                 
                 -- Simulate pressing the "B" key
                 virtualInputManager:SendKeyEvent(true, "B", false, game)
+                virtualInputManager:SendKeyEvent(true, "B", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "B", false, game)
-                wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+
             end
         end
     end
