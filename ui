@@ -2769,8 +2769,47 @@ spawn(function()
 
 --------------------------
 local Main = Library:Tab("Farm","rbxassetid://11446859498")
+local Teleport = Library:Tab("Teleport","rbxassetid://11446920523")
 local Setting = Library:Tab("Settings","rbxassetid://11446835336")
 --------------------------------------------------------------------
+
+
+
+
+
+Teleport:Button("Tân ThủThủ",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7024.1958, 142.463211, 4940.12451, 0.990554035, -1.18065726e-08, 0.137122914, 1.24602471e-08, 1, -3.90871824e-09, -0.137122914, 5.58038238e-09, 0.990554035)
+end)
+
+Teleport:Button("Sky",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(12596.7734, 849.775146, -1849.27808, -0.866166294, 3.95840765e-08, 0.499755859, 4.34042446e-09, 1, -7.16840916e-08, -0.499755859, -5.99211916e-08, -0.866166294)
+end)
+
+
+Teleport:Button("G88 BASE",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4591.1665, 1400.31995, -961.634766, -0.429940701, 1.4594832e-09, -0.902857125, -3.89006938e-10, 1, 1.80176141e-09, 0.902857125, 1.12586818e-09, -0.429940701)
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Setting:Label("Hãy Cày Thuê")
 
@@ -3209,7 +3248,6 @@ end
 
 
  
-
 
 
 
