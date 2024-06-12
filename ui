@@ -3077,7 +3077,6 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
         while _G.Skillzxvb do
             local virtualInputManager = game:GetService("VirtualInputManager")
             if virtualInputManager then
-                wait(1)
                 virtualInputManager:SendKeyEvent(true, "Z", false, game)
                 wait(0.44)
                 virtualInputManager:SendKeyEvent(false, "Z", false, game)
@@ -3112,6 +3111,14 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
                 virtualInputManager:SendKeyEvent(false, "B", false, game)
                 virtualInputManager:SendKeyEvent(true, "B", false, game)
 
+               wait(0.5)
+                virtualInputManager:SendKeyEvent(true, "Z", false, game)
+                wait(0.44)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
             end
         end
     end
