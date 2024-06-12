@@ -3074,44 +3074,30 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
     StopTween(_G.Skillzxvb)
 
     if _G.Skillzxvb then
-        startSkillAutomation()
-    else
-        stopSkillAutomation()
-    end
-end)
-
-local skillAutomationRunning = false
-local skillAutomationThread = nil
-
-local function automateSkills()
-    local virtualInputManager = game:GetService("VirtualInputManager")
-    local keys = {"Z", "X", "V", "B"}
-
-    while skillAutomationRunning do
-        wait(1)
-        for _, key in ipairs(keys) do
+        while _G.Skillzxvb do
+            wait(1)
+            local virtualInputManager = game:GetService("VirtualInputManager")
             if virtualInputManager then
-                virtualInputManager:SendKeyEvent(true, key, false, game)
+           
+                virtualInputManager:SendKeyEvent(true, "Z", false, game)
                 wait(0.4)
-                virtualInputManager:SendKeyEvent(false, key, false, game)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+      
+                virtualInputManager:SendKeyEvent(true, "X", false, game)
                 wait(0.4)
-                virtualInputManager:SendKeyEvent(false, key, false, game)
+                virtualInputManager:SendKeyEvent(false, "X", false, game)
+
+                virtualInputManager:SendKeyEvent(true, "V", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "V", false, game)
+               
+                virtualInputManager:SendKeyEvent(true, "B", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "B", false, game)
             end
         end
     end
-end
-
-function startSkillAutomation()
-    if not skillAutomationRunning then
-        skillAutomationRunning = true
-        skillAutomationThread = coroutine.create(automateSkills)
-        coroutine.resume(skillAutomationThread)
-    end
-end
-
-function stopSkillAutomation()
-    skillAutomationRunning = false
-end
+end)
 
 
 
