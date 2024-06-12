@@ -3067,83 +3067,60 @@ end)
 	
 
 
-Main:Toggle("Auto Skill Z-X-V-B",_G.Skillzxvb,function(value)
- _G.Skillzxvb = value
- StopTween(_G.Skillzxvb)
- end)
+_G.Skillzxvb = false
 
- while _G.Skillzxvb do
-    wait(3)
- local virtualInputManager = game:service('VirtualInputManager')
+Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
+    _G.Skillzxvb = value
+    StopTween(_G.Skillzxvb)
 
-if virtualInputManager then
-    -- Simulate pressing the "Z" key down
-    virtualInputManager:SendKeyEvent(true, "Z", false, game)
-    wait(0.4)
-    
-    -- Simulate pressing the "Z" key down again
-    virtualInputManager:SendKeyEvent(true, "Z", false, game)
-    wait(0.4)
-    
-    -- Simulate releasing the "Z" key
-    virtualInputManager:SendKeyEvent(false, "Z", false, game)
+    if _G.Skillzxvb then
+        startSkillAutomation()
+    else
+        stopSkillAutomation()
+    end
+end)
+
+local skillAutomationRunning = false
+local skillAutomationThread = nil
+
+local function automateSkills()
+    local virtualInputManager = game:GetService("VirtualInputManager")
+    local keys = {"Z", "X", "V", "B"}
+
+    while skillAutomationRunning do
+        wait(3)
+        for _, key in ipairs(keys) do
+            if virtualInputManager then
+                virtualInputManager:SendKeyEvent(true, key, false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, key, false, game)
+            end
+        end
+    end
 end
 
-local virtualInputManager = game:service('VirtualInputManager')
-
-if virtualInputManager then
-    -- Simulate pressing the "Z" key down
-    virtualInputManager:SendKeyEvent(true, "V", false, game)
-    wait(0.4)
-    
-    -- Simulate pressing the "Z" key down again
-    virtualInputManager:SendKeyEvent(true, "V", false, game)
-    wait(0.4)
-    
-    -- Simulate releasing the "Z" key
-    virtualInputManager:SendKeyEvent(false, "V", false, game)
+function startSkillAutomation()
+    if not skillAutomationRunning then
+        skillAutomationRunning = true
+        skillAutomationThread = coroutine.create(automateSkills)
+        coroutine.resume(skillAutomationThread)
+    end
 end
 
-local virtualInputManager = game:service('VirtualInputManager')
-
-if virtualInputManager then
-    -- Simulate pressing the "Z" key down
-    virtualInputManager:SendKeyEvent(true, "X", false, game)
-    wait(0.4)
-    
-    -- Simulate pressing the "Z" key down again
-    virtualInputManager:SendKeyEvent(true, "X", false, game)
-    wait(0.4)
-    
-    -- Simulate releasing the "Z" key
-    virtualInputManager:SendKeyEvent(false, "X", false, game)
-end
-
-local virtualInputManager = game:service('VirtualInputManager')
-
-if virtualInputManager then
-    -- Simulate pressing the "Z" key down
-    virtualInputManager:SendKeyEvent(true, "B", false, game)
-    wait(0.4)
-    
-    -- Simulate pressing the "Z" key down again
-    virtualInputManager:SendKeyEvent(true, "B", false, game)
-    wait(0.4)
-    
-    -- Simulate releasing the "Z" key
-    virtualInputManager:SendKeyEvent(false, "B", false, game)
-end
+function stopSkillAutomation()
+    skillAutomationRunning = false
 end
 
 
 
-_G.Soul = false
 
-Main:Toggle("Farm Lever Soul", _G.Soul, function(value)
-    _G.Soul = value
-    StopTween(_G.Soul)
+_G.Fruitvip = false
+
+Main:Toggle("Farm Lever Fruit", _G.Fruitvip, function(value)
+    _G.Fruitvip = value
+    StopTween(_G.Fruitvip)
     
-    if _G.Soul then
+    if _G.Fruitvip then
         startFarming()
     else
         stopFarming()
@@ -3154,29 +3131,33 @@ local farming = false
 local farmingThread = nil
 
 local function farmSoul()
+    local fruits = {"Soul", "PHOENIX", "Vampire", "Leopard", "Revive", "Mochi", "Venom", "Gas", "Operation", "Dragon", "Rubber"}
+    
     while farming do
-        wait(0.1) -- Chỉnh sửa thời gian chờ hợp lý
+         wait(1e-60)
         local player = game:GetService("Players").LocalPlayer
 
         if player and player.Character then
-            local Soul = player.Character:FindFirstChild("Soul")
-            if Soul then
-                local vampireArgs = {
-                    {
+            for _, fruitName in ipairs(fruits) do
+                local fruit = player.Character:FindFirstChild(fruitName)
+                if fruit then
+                    local args = {
                         {
-                            "\4",
-                            "Combat",
                             {
-                                Vector3.new(),
-                                Vector3.new()
-                            },
-                            false,
-                            Soul,
-                            "Fruit"
+                                "\4",
+                                "Combat",
+                                {
+                                    Vector3.new(),
+                                    Vector3.new()
+                                },
+                                false,
+                                fruit,
+                                "Fruit"
+                            }
                         }
                     }
-                }
-                game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(vampireArgs))
+                    game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+                end
             end
         end
     end
@@ -3193,6 +3174,7 @@ end
 function stopFarming()
     farming = false
 end
+
 
 
 
