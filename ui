@@ -3063,101 +3063,113 @@ end)
 
 
 
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	
 	
 
 
-Main:Toggle("Bãi 3 ( 2400-2425 ) Tạm Đc",_G.farm3,function(value)
- _G.farm3 = value
- _G.click = value
- StopTween(_G.farm3)
+Main:Toggle("Auto Skill Z-X-V-B",_G.Skillzxvb,function(value)
+ _G.Skillzxvb = value
+ StopTween(_G.Skillzxvb)
  end)
 
-	spawn(function()
- game:GetService("RunService").Heartbeat:Connect(function()
-  pcall(function()
-   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-   if _G.farm3 and StartMagnetBoneMon and (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") and (v.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 300 then
-   v.HumanoidRootPart.CFrame = PosMonBone
-   v.HumanoidRootPart.CanCollide = false
-   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-   if v.Humanoid:FindFirstChild("Animator") then
-   v.Humanoid.Animator:Destroy()
-   end
-   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-   end
-   end
-   end)
-  end)
+ while _G.Skillzxvb do
+    wait(3)
+ local virtualInputManager = game:service('VirtualInputManager')
+
+if virtualInputManager then
+    -- Simulate pressing the "Z" key down
+    virtualInputManager:SendKeyEvent(true, "Z", false, game)
+    wait(0.4)
+    
+    -- Simulate pressing the "Z" key down again
+    virtualInputManager:SendKeyEvent(true, "Z", false, game)
+    wait(0.4)
+    
+    -- Simulate releasing the "Z" key
+    virtualInputManager:SendKeyEvent(false, "Z", false, game)
+end
+
+local virtualInputManager = game:service('VirtualInputManager')
+
+if virtualInputManager then
+    -- Simulate pressing the "Z" key down
+    virtualInputManager:SendKeyEvent(true, "V", false, game)
+    wait(0.4)
+    
+    -- Simulate pressing the "Z" key down again
+    virtualInputManager:SendKeyEvent(true, "V", false, game)
+    wait(0.4)
+    
+    -- Simulate releasing the "Z" key
+    virtualInputManager:SendKeyEvent(false, "V", false, game)
+end
+
+local virtualInputManager = game:service('VirtualInputManager')
+
+if virtualInputManager then
+    -- Simulate pressing the "Z" key down
+    virtualInputManager:SendKeyEvent(true, "X", false, game)
+    wait(0.4)
+    
+    -- Simulate pressing the "Z" key down again
+    virtualInputManager:SendKeyEvent(true, "X", false, game)
+    wait(0.4)
+    
+    -- Simulate releasing the "Z" key
+    virtualInputManager:SendKeyEvent(false, "X", false, game)
+end
+
+local virtualInputManager = game:service('VirtualInputManager')
+
+if virtualInputManager then
+    -- Simulate pressing the "Z" key down
+    virtualInputManager:SendKeyEvent(true, "B", false, game)
+    wait(0.4)
+    
+    -- Simulate pressing the "Z" key down again
+    virtualInputManager:SendKeyEvent(true, "B", false, game)
+    wait(0.4)
+    
+    -- Simulate releasing the "Z" key
+    virtualInputManager:SendKeyEvent(false, "B", false, game)
+end
+end
+
+
+
+Main:Toggle("Farm Lever Soul",_G.Soul,function(value)
+ _G.Soul = value
+ StopTween(_G.Soul)
 end)
 
 
+while _G.Soul do
+    wait(1e-60)
+    local player = game:GetService("Players").LocalPlayer
 
 
 
+    local Soul = player.Character:FindFirstChild("Soul")
+    if Soul then
+        local vampireArgs = {
+            {
+                {
+                    "\4",
+                    "Combat",
+                    {
+                        Vector3.new(),
+                        Vector3.new()
+                    },
+                    false,
+                    Soul,
+                    "Fruit"
+                }
+            }
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(vampireArgs))
+    end
 
-
-
-spawn(function()
- while wait() do
- if _G.farm3 and World3 then
- pcall(function()
-  if game:GetService("Workspace").Enemies:FindFirstChild("Candy Pirate [Lv. 2400]") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Demon [Lv. 2425]")  then
-  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-  if v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]"  then
-  if v.Humanoid.Health > 0 then
-  repeat wait()
-  AutoHaki()
-  EquipWeapon(_G.Select_Weapon)
-  StartMagnetBoneMon = true
-  v.HumanoidRootPart.CanCollide = false
-  v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-  PosMonBone = v.HumanoidRootPart.CFrame
-  topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  game:GetService'VirtualUser':CaptureController()
-  game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-  until _G.farm3 == false or not v.Parent or v.Humanoid.Health <= 0
-  end
-  end
-  end
-  else
-   StartMagnetBoneMon = false
-  for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
-  if v.Name == "Candy Pirate [Lv. 2400]" then
-  topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  elseif v.Name == "Snow Demon [Lv. 2425]" then
-  topos(v.HumanoidRootPart.CFrame * MethodFarm)
-  end
-  end
-  topos(CFrame.new(-1068.36743, 14.9015837, -14466.7695, 0.951788664, 0.295479625, 0.0824019462, -0.297645211, 0.9545573, 0.0150860008, -0.0741997808, -0.0388852358, 0.996484995))
-  end
-  end)
- end
- end
- end)
+end
 
 
 
