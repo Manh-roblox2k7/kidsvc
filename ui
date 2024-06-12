@@ -3137,38 +3137,61 @@ end
 
 
 
-Main:Toggle("Farm Lever Soul",_G.Soul,function(value)
- _G.Soul = value
- StopTween(_G.Soul)
+_G.Soul = false
+
+Main:Toggle("Farm Lever Soul", _G.Soul, function(value)
+    _G.Soul = value
+    StopTween(_G.Soul)
+    
+    if _G.Soul then
+        startFarming()
+    else
+        stopFarming()
+    end
 end)
 
+local farming = false
+local farmingThread = nil
 
-while _G.Soul do
-    wait(1e-60)
-    local player = game:GetService("Players").LocalPlayer
+local function farmSoul()
+    while farming do
+        wait(0.1) -- Chỉnh sửa thời gian chờ hợp lý
+        local player = game:GetService("Players").LocalPlayer
 
-
-
-    local Soul = player.Character:FindFirstChild("Soul")
-    if Soul then
-        local vampireArgs = {
-            {
-                {
-                    "\4",
-                    "Combat",
+        if player and player.Character then
+            local Soul = player.Character:FindFirstChild("Soul")
+            if Soul then
+                local vampireArgs = {
                     {
-                        Vector3.new(),
-                        Vector3.new()
-                    },
-                    false,
-                    Soul,
-                    "Fruit"
+                        {
+                            "\4",
+                            "Combat",
+                            {
+                                Vector3.new(),
+                                Vector3.new()
+                            },
+                            false,
+                            Soul,
+                            "Fruit"
+                        }
+                    }
                 }
-            }
-        }
-        game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(vampireArgs))
+                game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(vampireArgs))
+            end
+        end
     end
+end
 
+function startFarming()
+    if not farming then
+        farming = true
+        farmingThread = coroutine.create(farmSoul)
+        coroutine.resume(farmingThread)
+    end
+end
+
+function stopFarming()
+    farming = false
 end
 
 
