@@ -3074,23 +3074,22 @@ Main:Toggle("Auto Skill Z-X-V-B", _G.Skillzxvb, function(value)
     StopTween(_G.Skillzxvb)
 
     if _G.Skillzxvb then
-        while _G.Skillzxvb do
-            wait(1)
+        while _G.Skillzxvb do           
             local virtualInputManager = game:GetService("VirtualInputManager")
             if virtualInputManager then
            
                 virtualInputManager:SendKeyEvent(true, "Z", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "Z", false, game)
-      
+                wait(1)
                 virtualInputManager:SendKeyEvent(true, "X", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "X", false, game)
-
+                wait(1)
                 virtualInputManager:SendKeyEvent(true, "V", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "V", false, game)
-               
+                wait(1)
                 virtualInputManager:SendKeyEvent(true, "B", false, game)
                 wait(0.4)
                 virtualInputManager:SendKeyEvent(false, "B", false, game)
