@@ -3222,6 +3222,38 @@ function stopFarming()
     farming = false
 end
 
+-- Function to stop any ongoing tweening operations
+function StopTween(toggle)
+    if not toggle then
+        -- Add your stop tween logic here
+    end
+end
+
+-- Toggle function for "Farm Lever Fruit"
+Main:Toggle("Auto Haki Bá Vương", _G.hakivavuong, function(value)
+    _G.hakivavuong = value
+    StopTween(_G.hakivavuong)
+
+    -- Start a coroutine to handle the repeated action
+    coroutine.wrap(function()
+        while _G.hakivavuong do
+            wait(1e-60) -- Extremely short wait time, consider increasing to prevent performance issues
+
+            local args = {
+                [1] = {
+                    [1] = {
+                        [1] = "\4",
+                        [2] = "HaoHaki",
+                        [3] = "null",
+                        [4] = false
+                    }
+                }
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+        end
+    end)()
+end)
 
 
 
