@@ -2770,7 +2770,6 @@ spawn(function()
 --------------------------
 local Main = Library:Tab("Farm","rbxassetid://11446859498")
 local Teleport = Library:Tab("Teleport","rbxassetid://11446920523")
-local Status = Library:Tab("Status","rbxassetid://7040410130")
 local Setting = Library:Tab("Settings","rbxassetid://11446835336")
 --------------------------------------------------------------------
 
@@ -2792,85 +2791,24 @@ game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4591.16
 end)
 
 
+Teleport:Button("Sa Mạc",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2233.50024, 240.821274, 4786.16602, -0.660604835, -8.11019802e-08, -0.750733793, 2.98845726e-09, 1, -1.10659954e-07, 0.750733793, -7.5346037e-08, -0.660604835)
+end)
 
+Teleport:Button("WATER 77",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1575.24048, 261.419861, 11594.0811, -0.987159312, -5.86827298e-08, 0.159738898, -4.45361223e-08, 1, 9.21408798e-08, -0.159738898, 8.3843581e-08, -0.987159312)
+end)
 
+Teleport:Button("DENIES LOBBY",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9401.49707, 368.133698, 12764.8828, -0.871992767, -1.10346567e-08, -0.489518791, -4.23883435e-08, 1, 5.29656354e-08, 0.489518791, 6.69355416e-08, -0.871992767)
+end)
 
-
-
-
-
-
-
-
-
-
-
--- Thiết lập trạng thái ban đầu
-Status:Seperator("Bò Sea Event")
-local Elite_Hunter_Status1 = Status:Label("Status")
-
--- Tạo vòng lặp kiểm tra Sea Beast
-spawn(function()
-    while wait(1) do  -- Chờ 1 giây để giảm tải CPU
-        pcall(function()
-            -- Tìm Sea Beast container
-            local seaBeastContainer = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast")
-            if seaBeastContainer then
-                -- Tìm Sea Beast cụ thể
-                local seaBeast = seaBeastContainer:FindFirstChild("SeaBeast2")
-                if seaBeast then
-                    -- Kiểm tra trạng thái của Sea Beast
-                    if seaBeast.Died == true then
-                        Elite_Hunter_Status1:Set("Status : Bò is dead 💀")
-                    else
-                        Elite_Hunter_Status1:Set("Status : Bò is alive 😊")
-                    end
-                else
-                    Elite_Hunter_Status1:Set("Status : Bò is dead 💀") -- Mặc định nếu không tìm thấy Sea Beast
-                end
-            else
-                Elite_Hunter_Status1:Set("Status : Bò is dead 💀") -- Mặc định nếu không tìm thấy container
-            end
-        end)
-    end
+Teleport:Button("LITTLE ISLAND",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3610.07739, 127.214798, 6719.01123, 0.739542425, 4.85391034e-08, 0.673109949, 2.13186855e-08, 1, -9.55344319e-08, -0.673109949, 8.50015809e-08, 0.739542425)
 end)
 
 
-
-
--- Thiết lập trạng thái ban đầu
-Status:Seperator("Chim Sea Event")
-local Elite_Hunter_Status1 = Status:Label("Status")
-
--- Tạo vòng lặp kiểm tra Sea Beast
-spawn(function()
-    while wait(1) do  -- Chờ 1 giây để giảm tải CPU
-        pcall(function()
-            -- Tìm Sea Beast container
-            local seaBeastContainer = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast")
-            if seaBeastContainer then
-                -- Tìm Sea Beast cụ thể
-                local seaBeast = seaBeastContainer:FindFirstChild("SeaBeast")
-                if seaBeast then
-                    -- Kiểm tra trạng thái của Sea Beast
-                    if seaBeast.Died == true then
-                        Elite_Hunter_Status1:Set("Status : Chim is dead 💀")
-                    else
-                        Elite_Hunter_Status1:Set("Status : Chim is alive 😊")
-                    end
-                else
-                    Elite_Hunter_Status1:Set("Status : Chim is dead 💀") -- Mặc định nếu không tìm thấy Sea Beast
-                end
-            else
-                Elite_Hunter_Status1:Set("Status : Chim is dead 💀") -- Mặc định nếu không tìm thấy container
-            end
-        end)
-    end
-end)
-
-
-
-
+Teleport:Seperator("Bò và Chim - Sea Event")
 
 
 
@@ -3240,7 +3178,7 @@ local farming = false
 local farmingThread = nil
 
 local function farmSoul()
-    local fruits = {"Soul", "PHOENIX", "Vampire", "Leopard", "Revive", "Mochi", "Venom", "Gas", "Operation", "Dragon", "Rubber"}
+    local fruits = {"Soul", "Phoenix", "Vampire", "Leopard", "Revive", "Mochi", "Venom", "Gas", "Operation", "Dragon", "Rubber","Sound","Electric","Dark","Spring","Buddha","Snow"}
     
     while farming do
          wait(1e-60)
