@@ -2770,6 +2770,7 @@ spawn(function()
 --------------------------
 local Main = Library:Tab("Farm","rbxassetid://11446859498")
 local Teleport = Library:Tab("Teleport","rbxassetid://11446920523")
+local Status = Library:Tab("Status","rbxassetid://7040410130")
 local Setting = Library:Tab("Settings","rbxassetid://11446835336")
 --------------------------------------------------------------------
 
@@ -2777,7 +2778,7 @@ local Setting = Library:Tab("Settings","rbxassetid://11446835336")
 
 
 
-Teleport:Button("Tân ThủThủ",function()
+Teleport:Button("Tân thủ  ( Sea2 )",function()
 game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7024.1958, 142.463211, 4940.12451, 0.990554035, -1.18065726e-08, 0.137122914, 1.24602471e-08, 1, -3.90871824e-09, -0.137122914, 5.58038238e-09, 0.990554035)
 end)
 
@@ -2799,8 +2800,45 @@ end)
 
 
 
+Status:Seperator("Sea Event")
+
+local Total_Elite_Hunter = Status:Label("Sea Event")
+
+local Elite_Hunter_Status = Status:Label("Status")
 
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            local seaBeast = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast"):FindFirstChild("SeaBeast")
+            if seaBeast and seaBeast.Died == true then
+                Elite_Hunter_Status:Set("Status : Chim is dead 💀")	
+            else
+                Elite_Hunter_Status:Set("Status : Chim is alive 😊")	
+            end
+        end)
+    end
+end)
+
+Status:Seperator("Sea Event")
+
+local Total_Elite_Hunter = Status:Label("Sea Event")
+
+local Elite_Hunter_Status = Status:Label("Status")
+
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            local seaBeast = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast"):FindFirstChild("SeaBeast2")
+            if seaBeast and seaBeast.Died == true then
+                Elite_Hunter_Status:Set("Status : Cow is dead 💀")	
+            else
+                Elite_Hunter_Status:Set("Status : CCow is alive 😊")	
+            end
+        end)
+    end
+end)
 
 
 
@@ -3248,7 +3286,6 @@ end
 
 
  
-
 
 
 
