@@ -3108,54 +3108,7 @@ end)
 	
 
 
-_G.Skillzxvb = false
 
-Main:Toggle("Auto Skill X-V-B", _G.Skillzxvb, function(value)
-    _G.Skillzxvb = value
-    StopTween(_G.Skillzxvb)
-
-    if _G.Skillzxvb then
-        while _G.Skillzxvb do
-            local virtualInputManager = game:GetService("VirtualInputManager")
-            if virtualInputManager then
-                virtualInputManager:SendKeyEvent(true, "Z", false, game)
-                wait(0.44)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                wait(0.4)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                virtualInputManager:SendKeyEvent(false, "Z", false, game)
-                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
-                
-                -- Simulate pressing the "X" key
-                virtualInputManager:SendKeyEvent(true, "X", false, game)
-                wait(0.44)
-                  virtualInputManager:SendKeyEvent(true, "X", false, game)
-                wait(0.4)
-                virtualInputManager:SendKeyEvent(false, "X", false, game)
-                virtualInputManager:SendKeyEvent(false, "X", false, game)
-                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
-                
-                -- Simulate pressing the "V" key
-                virtualInputManager:SendKeyEvent(true, "V", false, game)
-                wait(0.44)
-                     virtualInputManager:SendKeyEvent(true, "V", false, game)
-                wait(0.4)
-                virtualInputManager:SendKeyEvent(false, "V", false, game)
-                virtualInputManager:SendKeyEvent(true, "V", false, game)
-                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
-                
-                -- Simulate pressing the "B" key
-                virtualInputManager:SendKeyEvent(true, "B", false, game)
-                wait(0.44)
-                virtualInputManager:SendKeyEvent(true, "B", false, game)
-                wait(0.4)
-                virtualInputManager:SendKeyEvent(false, "B", false, game)
-                virtualInputManager:SendKeyEvent(true, "B", false, game)
-
-            end
-        end
-    end
-end)
 
 
 
@@ -3228,6 +3181,130 @@ function StopTween(toggle)
         -- Add your stop tween logic here
     end
 end
+
+
+
+
+
+_G.farmsword = false
+
+Main:Toggle("Farm Lever Sword", _G.farmsword, function(value)
+    _G.farmsword = value
+    StopTween(_G.farmsword)
+    
+    if _G.farmsword then
+        startFarmSword()
+    else
+        stopFarmSword()
+    end
+end)
+
+local farmSwordRunning = false
+local farmSwordThread = nil
+
+local function farmSword()
+    while farmSwordRunning do
+        wait(1)
+        local player = game:GetService("Players").LocalPlayer
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        local remoteEvent = replicatedStorage:WaitForChild("RemoteEvent")
+
+        local weapons = {"Raysword", "Pole", "Jitte","Polev2"}
+
+        for _, weaponName in ipairs(weapons) do
+            local weapon = player.Character:FindFirstChild(weaponName)
+            if weapon then
+                local args = {
+                    [1] = {
+                        [1] = {
+                            [1] = "\4",
+                            [2] = "Combat",
+                            [3] = 1, -- You can adjust this value as needed
+                            [4] = false,
+                            [5] = weapon,
+                            [6] = "Sword"
+                        }
+                    }
+                }
+                remoteEvent:FireServer(unpack(args))
+                wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+            end
+        end
+    end
+end
+
+function startFarmSword()
+    if not farmSwordRunning then
+        farmSwordRunning = true
+        farmSwordThread = coroutine.create(farmSword)
+        coroutine.resume(farmSwordThread)
+    end
+end
+
+function stopFarmSword()
+    farmSwordRunning = false
+end
+
+
+
+
+
+
+
+_G.Skillzxvb = false
+
+Main:Toggle("Auto Skill X-V-B", _G.Skillzxvb, function(value)
+    _G.Skillzxvb = value
+    StopTween(_G.Skillzxvb)
+
+    if _G.Skillzxvb then
+        while _G.Skillzxvb do
+            local virtualInputManager = game:GetService("VirtualInputManager")
+            if virtualInputManager then
+                virtualInputManager:SendKeyEvent(true, "Z", false, game)
+                wait(0.44)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                virtualInputManager:SendKeyEvent(false, "Z", false, game)
+                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+                
+                -- Simulate pressing the "X" key
+                virtualInputManager:SendKeyEvent(true, "X", false, game)
+                wait(0.44)
+                  virtualInputManager:SendKeyEvent(true, "X", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "X", false, game)
+                virtualInputManager:SendKeyEvent(false, "X", false, game)
+                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+                
+                -- Simulate pressing the "V" key
+                virtualInputManager:SendKeyEvent(true, "V", false, game)
+                wait(0.44)
+                     virtualInputManager:SendKeyEvent(true, "V", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "V", false, game)
+                virtualInputManager:SendKeyEvent(true, "V", false, game)
+                wait(0.5) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+                
+                -- Simulate pressing the "B" key
+                virtualInputManager:SendKeyEvent(true, "B", false, game)
+                wait(0.44)
+                virtualInputManager:SendKeyEvent(true, "B", false, game)
+                wait(0.4)
+                virtualInputManager:SendKeyEvent(false, "B", false, game)
+                virtualInputManager:SendKeyEvent(true, "B", false, game)
+
+            end
+        end
+    end
+end)
+
+
+
+
+
+
 
 -- Toggle function for "Farm Lever Fruit"
 Main:Toggle("Auto Haki Bá Vương", _G.hakivavuong, function(value)
