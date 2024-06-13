@@ -3193,56 +3193,59 @@ Main:Toggle("Farm Lever Sword", _G.farmsword, function(value)
     StopTween(_G.farmsword)
     
     if _G.farmsword then
-        startFarmSword()
+        startFarmingSword()
     else
-        stopFarmSword()
+        stopFarmingSword()
     end
 end)
 
-local farmSwordRunning = false
-local farmSwordThread = nil
+local farmingSwordRunning = false
+local farmingSwordThread = nil
 
 local function farmSword()
-    while farmSwordRunning do
-        wait(1)
+    local weapons = {"Raysword", "Pole", "Jitte"}
+    
+    while farmingSwordRunning do
+        wait(1e-60) -- Chỉnh sửa thời gian chờ hợp lý
         local player = game:GetService("Players").LocalPlayer
-        local replicatedStorage = game:GetService("ReplicatedStorage")
-        local remoteEvent = replicatedStorage:WaitForChild("RemoteEvent")
+        local remoteEvent = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent")
 
-        local weapons = {"Raysword", "Pole", "Jitte","Polev2"}
-
-        for _, weaponName in ipairs(weapons) do
-            local weapon = player.Character:FindFirstChild(weaponName)
-            if weapon then
-                local args = {
-                    [1] = {
-                        [1] = {
-                            [1] = "\4",
-                            [2] = "Combat",
-                            [3] = 1, -- You can adjust this value as needed
-                            [4] = false,
-                            [5] = weapon,
-                            [6] = "Sword"
+        if player and player.Character then
+            for _, weaponName in ipairs(weapons) do
+                local weapon = player.Character:FindFirstChild(weaponName)
+                if weapon then
+                    local args = {
+                        {
+                            {
+                                "\4",
+                                "Combat",
+                                {
+                                    Vector3.new(),
+                                    Vector3.new()
+                                },
+                                false,
+                                weapon,
+                                "Sword"
+                            }
                         }
                     }
-                }
-                remoteEvent:FireServer(unpack(args))
-                wait(1) -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+                    remoteEvent:FireServer(unpack(args))
+                end
             end
         end
     end
 end
 
-function startFarmSword()
-    if not farmSwordRunning then
-        farmSwordRunning = true
-        farmSwordThread = coroutine.create(farmSword)
-        coroutine.resume(farmSwordThread)
+function startFarmingSword()
+    if not farmingSwordRunning then
+        farmingSwordRunning = true
+        farmingSwordThread = coroutine.create(farmSword)
+        coroutine.resume(farmingSwordThread)
     end
 end
 
-function stopFarmSword()
-    farmSwordRunning = false
+function stopFarmingSword()
+    farmingSwordRunning = false
 end
 
 
