@@ -2805,27 +2805,31 @@ end)
 
 
 
-Status:Seperator("Bò Event")
-
-local Total_Elite_Hunter = Status:Label("Bò Event")
-
+-- Thiết lập trạng thái ban đầu
+Status:Seperator("Bò Sea Event")
 local Elite_Hunter_Status1 = Status:Label("Status")
 
-
+-- Tạo vòng lặp kiểm tra Sea Beast
 spawn(function()
     while wait(1) do  -- Chờ 1 giây để giảm tải CPU
         pcall(function()
-            -- Tìm Sea Beast
+            -- Tìm Sea Beast container
             local seaBeastContainer = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast")
             if seaBeastContainer then
+                -- Tìm Sea Beast cụ thể
                 local seaBeast = seaBeastContainer:FindFirstChild("SeaBeast2")
                 if seaBeast then
+                    -- Kiểm tra trạng thái của Sea Beast
                     if seaBeast.Died == true then
                         Elite_Hunter_Status1:Set("Status : Bò is dead 💀")
                     else
                         Elite_Hunter_Status1:Set("Status : Bò is alive 😊")
                     end
+                else
+                    Elite_Hunter_Status1:Set("Status : Bò is dead 💀") -- Mặc định nếu không tìm thấy Sea Beast
                 end
+            else
+                Elite_Hunter_Status1:Set("Status : Bò is dead 💀") -- Mặc định nếu không tìm thấy container
             end
         end)
     end
@@ -2834,6 +2838,35 @@ end)
 
 
 
+-- Thiết lập trạng thái ban đầu
+Status:Seperator("Chim Sea Event")
+local Elite_Hunter_Status1 = Status:Label("Status")
+
+-- Tạo vòng lặp kiểm tra Sea Beast
+spawn(function()
+    while wait(1) do  -- Chờ 1 giây để giảm tải CPU
+        pcall(function()
+            -- Tìm Sea Beast container
+            local seaBeastContainer = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast")
+            if seaBeastContainer then
+                -- Tìm Sea Beast cụ thể
+                local seaBeast = seaBeastContainer:FindFirstChild("SeaBeast")
+                if seaBeast then
+                    -- Kiểm tra trạng thái của Sea Beast
+                    if seaBeast.Died == true then
+                        Elite_Hunter_Status1:Set("Status : Chim is dead 💀")
+                    else
+                        Elite_Hunter_Status1:Set("Status : Chim is alive 😊")
+                    end
+                else
+                    Elite_Hunter_Status1:Set("Status : Chim is dead 💀") -- Mặc định nếu không tìm thấy Sea Beast
+                end
+            else
+                Elite_Hunter_Status1:Set("Status : Chim is dead 💀") -- Mặc định nếu không tìm thấy container
+            end
+        end)
+    end
+end)
 
 
 
