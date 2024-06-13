@@ -2800,45 +2800,38 @@ end)
 
 
 
-Status:Seperator("Sea Event")
 
-local Total_Elite_Hunter = Status:Label("Sea Event")
 
-local Elite_Hunter_Status = Status:Label("Status")
+
+
+
+Status:Seperator("Bò Event")
+
+local Total_Elite_Hunter = Status:Label("Bò Event")
+
+local Elite_Hunter_Status1 = Status:Label("Status")
 
 
 spawn(function()
-    while wait() do
+    while wait(1) do  -- Chờ 1 giây để giảm tải CPU
         pcall(function()
-            local seaBeast = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast"):FindFirstChild("SeaBeast")
-            if seaBeast and seaBeast.Died == true then
-                Elite_Hunter_Status:Set("Status : Chim is dead 💀")	
-            else
-                Elite_Hunter_Status:Set("Status : Chim is alive 😊")	
+            -- Tìm Sea Beast
+            local seaBeastContainer = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast")
+            if seaBeastContainer then
+                local seaBeast = seaBeastContainer:FindFirstChild("SeaBeast2")
+                if seaBeast then
+                    if seaBeast.Died == true then
+                        Elite_Hunter_Status1:Set("Status : Bò is dead 💀")
+                    else
+                        Elite_Hunter_Status1:Set("Status : Bò is alive 😊")
+                    end
+                end
             end
         end)
     end
 end)
 
-Status:Seperator("Sea Event")
 
-local Total_Elite_Hunter = Status:Label("Sea Event")
-
-local Elite_Hunter_Status = Status:Label("Status")
-
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            local seaBeast = game:GetService("Workspace"):FindFirstChild("__GAME"):FindFirstChild("__Mobs"):FindFirstChild("__SeaBeast"):FindFirstChild("SeaBeast2")
-            if seaBeast and seaBeast.Died == true then
-                Elite_Hunter_Status:Set("Status : Cow is dead 💀")	
-            else
-                Elite_Hunter_Status:Set("Status : CCow is alive 😊")	
-            end
-        end)
-    end
-end)
 
 
 
