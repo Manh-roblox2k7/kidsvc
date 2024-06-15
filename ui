@@ -2770,68 +2770,15 @@ spawn(function()
 --------------------------
 local Main = Library:Tab("Farm","rbxassetid://11446859498")
 local Teleport = Library:Tab("Teleport","rbxassetid://11446920523")
+local Shop = Library:Tab("Shop","rbxassetid://6031265976")
+local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Setting = Library:Tab("Settings","rbxassetid://11446835336")
 --------------------------------------------------------------------
 
 
 
 
-Teleport:Seperator("Teleport Island")
-Teleport:Button("Tân thủ ( 600 - 680 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7024.1958, 142.463211, 4940.12451, 0.990554035, -1.18065726e-08, 0.137122914, 1.24602471e-08, 1, -3.90871824e-09, -0.137122914, 5.58038238e-09, 0.990554035)
-end)
 
-Teleport:Button("Tuyết ( 680 - 800",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1493.67993, 131.021545, -2918.64722, 0.813434422, 2.19019611e-08, 0.581656635, 1.81393869e-08, 1, -6.30220001e-08, -0.581656635, 6.18151574e-08, 0.813434422)
-end)
-
-
-Teleport:Button("Khổng Lồ ( 800 - 950 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3194.39307, 127.276726, 6362.2959, -0.918875039, -3.52841467e-09, -0.394548625, -1.00836566e-08, 1, 1.45411878e-08, 0.394548625, 1.73400281e-08, -0.918875039)
-end)
-
-Teleport:Button("Sa Mạc ( 950 - 1350 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1769.81372, 128.175339, 3954.04468, -0.610861838, -3.43789033e-08, 0.791737199, -2.30816593e-08, 1, 2.56135486e-08, -0.791737199, -2.62826827e-09, -0.610861838)
-end)
-
-Teleport:Button("Flamingo ( 1350 - 1575",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2854.07178, 138.975967, -5182.9624, -0.381014079, 4.83460916e-08, -0.924569249, 9.47949488e-08, 1, 1.32254891e-08, 0.924569249, -8.26053963e-08, -0.381014079)
-end)
-
-
-Teleport:Button("Bầu Trời ( 1575 - 2050",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(12128.957, 871.35675, -3395.10522, -0.46495831, -3.58996317e-08, -0.885332584, -7.99898885e-08, 1, 1.45971357e-09, 0.885332584, 7.14963591e-08, -0.46495831)
-end)
-
-
-Teleport:Button("Tổng bộ G88 ( 2050 - 2300",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4520.26416, 559.147827, -862.622131, 0.225354165, -9.60279465e-08, 0.9742769, 6.98765277e-08, 1, 8.24005824e-08, -0.9742769, 4.95097723e-08, 0.225354165)
-end)
-
-Teleport:Button("Đảo Trung Tâm ( 2300 - 2800 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9463.98145, 140.673157, 3223.27661, -0.994506955, 9.47442236e-10, -0.104670584, -4.13236911e-09, 1, 4.83145506e-08, 0.104670584, 4.84816951e-08, -0.994506955)
-end)
-
-
-Teleport:Button("WATER 77 ( 2800 - 3800 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1563.0166, 153.136459, 11540.2422, 0.981321871, 1.82648261e-08, -0.192373142, -3.239305e-08, 1, -7.02966148e-08, 0.192373142, 7.5215155e-08, 0.981321871)
-end)
-
-Teleport:Button("Đảo Công Lý ( 3800 - 5000 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9086.6123, 254.69606, 12263.7812, -0.827146769, 6.16512574e-09, -0.56198597, 7.75417597e-09, 1, -4.42566345e-10, 0.56198597, -4.72380579e-09, -0.827146769)
-end)
-
-Teleport:Button("Đảo Bóng Đêm ( 5000 - 6500 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8971.21777, 134.890472, -8152.31738, 0.997410893, 3.8423341e-08, -0.0719133615, -4.2706116e-08, 1, -5.80170827e-08, 0.0719133615, 6.09380066e-08, 0.997410893)
-end)
-
-Teleport:Button("Đảo Bong Bóng ( 6500 - 8000 )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2421.33838, 133.276855, -7942.13086, 0.783276379, 2.02610746e-08, 0.621673644, -2.28894841e-08, 1, -3.75161902e-09, -0.621673644, -1.12912337e-08, 0.783276379)
-end)
-
-Teleport:Button("Mắt Diều Hâu ( Boss 13B )",function()
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9533.75, 139.294861, 8480.95801, 0.984317601, -2.00715853e-08, -0.17640543, 2.93855162e-08, 1, 5.0186074e-08, 0.17640543, -5.45827987e-08, 0.984317601)
-end)
 
 
 
@@ -3210,6 +3157,71 @@ end
 
 
 
+_G.Mele = false
+
+Main:Toggle("Farm Lever Mele", _G.Mele, function(value)
+    _G.Mele = value
+    StopTween(_G.Mele)
+    
+    if _G.Mele then
+        startFarmingMele()
+    else
+        stopFarmingMele()
+    end
+end)
+
+local farmingMeleRunning = false
+local farmingMeleThread = nil
+
+local function farmMele()
+    local melees = {"Fishmankarate", "Blackleg", "Rokushiki"}
+    
+    while farmingMeleRunning do
+        wait(1e-60) -- Chỉnh sửa thời gian chờ hợp lý
+        local player = game:GetService("Players").LocalPlayer
+        local remoteEvent = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent")
+
+        if player and player.Character then
+            for _, meleName in ipairs(melees) do
+                local mele = player.Character:FindFirstChild(meleName)
+                if mele then
+                    local args = {
+                        {
+                            {
+                                "\4",
+                                "Combat",
+                                {
+                                    Vector3.new(),
+                                    Vector3.new()
+                                },
+                                false,
+                                mele,
+                                "Melee"
+                            }
+                        }
+                    }
+                    remoteEvent:FireServer(unpack(args))
+                -- Chờ 1 giây trước khi nhấn kỹ năng tiếp theo
+                end
+            end
+        end
+    end
+end
+
+function startFarmingMele()
+    if not farmingMeleRunning then
+        farmingMeleRunning = true
+        farmingMeleThread = coroutine.create(farmMele)
+        coroutine.resume(farmingMeleThread)
+    end
+end
+
+function stopFarmingMele()
+    farmingMeleRunning = false
+end
+
+
+
 
 
 _G.farmsword = false
@@ -3291,6 +3303,7 @@ Main:Toggle("Auto Skill X-V-B", _G.Skillzxvb, function(value)
             local virtualInputManager = game:GetService("VirtualInputManager")
             if virtualInputManager then
                 virtualInputManager:SendKeyEvent(true, "Z", false, game)
+                virtualInputManager:SendKeyEvent(true, "Z", false, game)
                 wait(0.44)
                 virtualInputManager:SendKeyEvent(false, "Z", false, game)
                 wait(0.4)
@@ -3362,12 +3375,146 @@ Main:Toggle("Auto Haki Bá Vương", _G.hakivavuong, function(value)
 end)
 
 
+if 13155198714 then
+
+Teleport:Seperator("Teleport Island")
+Teleport:Button("Tân thủ ( 600 - 680 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7024.1958, 142.463211, 4940.12451, 0.990554035, -1.18065726e-08, 0.137122914, 1.24602471e-08, 1, -3.90871824e-09, -0.137122914, 5.58038238e-09, 0.990554035)
+end)
+
+Teleport:Button("Tuyết ( 680 - 800",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1493.67993, 131.021545, -2918.64722, 0.813434422, 2.19019611e-08, 0.581656635, 1.81393869e-08, 1, -6.30220001e-08, -0.581656635, 6.18151574e-08, 0.813434422)
+end)
+
+
+Teleport:Button("Khổng Lồ ( 800 - 950 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3194.39307, 127.276726, 6362.2959, -0.918875039, -3.52841467e-09, -0.394548625, -1.00836566e-08, 1, 1.45411878e-08, 0.394548625, 1.73400281e-08, -0.918875039)
+end)
+
+Teleport:Button("Sa Mạc ( 950 - 1350 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1769.81372, 128.175339, 3954.04468, -0.610861838, -3.43789033e-08, 0.791737199, -2.30816593e-08, 1, 2.56135486e-08, -0.791737199, -2.62826827e-09, -0.610861838)
+end)
+
+Teleport:Button("Flamingo ( 1350 - 1575",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2854.07178, 138.975967, -5182.9624, -0.381014079, 4.83460916e-08, -0.924569249, 9.47949488e-08, 1, 1.32254891e-08, 0.924569249, -8.26053963e-08, -0.381014079)
+end)
+
+
+Teleport:Button("Bầu Trời ( 1575 - 2050",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(12128.957, 871.35675, -3395.10522, -0.46495831, -3.58996317e-08, -0.885332584, -7.99898885e-08, 1, 1.45971357e-09, 0.885332584, 7.14963591e-08, -0.46495831)
+end)
+
+
+Teleport:Button("Tổng bộ G88 ( 2050 - 2300",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4520.26416, 559.147827, -862.622131, 0.225354165, -9.60279465e-08, 0.9742769, 6.98765277e-08, 1, 8.24005824e-08, -0.9742769, 4.95097723e-08, 0.225354165)
+end)
+
+Teleport:Button("Đảo Trung Tâm ( 2300 - 2800 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9463.98145, 140.673157, 3223.27661, -0.994506955, 9.47442236e-10, -0.104670584, -4.13236911e-09, 1, 4.83145506e-08, 0.104670584, 4.84816951e-08, -0.994506955)
+end)
+
+
+Teleport:Button("WATER 77 ( 2800 - 3800 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1563.0166, 153.136459, 11540.2422, 0.981321871, 1.82648261e-08, -0.192373142, -3.239305e-08, 1, -7.02966148e-08, 0.192373142, 7.5215155e-08, 0.981321871)
+end)
+
+Teleport:Button("Đảo Công Lý ( 3800 - 5000 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9086.6123, 254.69606, 12263.7812, -0.827146769, 6.16512574e-09, -0.56198597, 7.75417597e-09, 1, -4.42566345e-10, 0.56198597, -4.72380579e-09, -0.827146769)
+end)
+
+Teleport:Button("Đảo Bóng Đêm ( 5000 - 6500 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8971.21777, 134.890472, -8152.31738, 0.997410893, 3.8423341e-08, -0.0719133615, -4.2706116e-08, 1, -5.80170827e-08, 0.0719133615, 6.09380066e-08, 0.997410893)
+end)
+
+Teleport:Button("Đảo Bong Bóng ( 6500 - 8000 )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2421.33838, 133.276855, -7942.13086, 0.783276379, 2.02610746e-08, 0.621673644, -2.28894841e-08, 1, -3.75161902e-09, -0.621673644, -1.12912337e-08, 0.783276379)
+end)
+
+Teleport:Button("Mắt Diều Hâu ( Boss 13B )",function()
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9533.75, 139.294861, 8480.95801, 0.984317601, -2.00715853e-08, -0.17640543, 2.93855162e-08, 1, 5.0186074e-08, 0.17640543, -5.45827987e-08, 0.984317601)
+end)
+end
 
 
 
 
+
+
+ Shop:Button("Mua Karate Fishman ( 1.25M beli )",function()
+ local args = {
+    [1] = {
+        [1] = {
+            [1] = "\3",
+            [2] = "BuyItem",
+            [3] = 305
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+
+ end)
+ 
+Shop:Button("Mua Black Leg ( 700k beli )",function()
+local args = {
+    [1] = {
+        [1] = {
+            [1] = "\3",
+            [2] = "BuyItem",
+            [3] = 302
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+
+ end)
+
+Shop:Button("Mua Lục Phong ( 7.5M beli )",function()
+local args = {
+    [1] = {
+        [1] = {
+            [1] = "\3",
+            [2] = "BuyItem",
+            [3] = 306
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+
+ end)
+
+
+ Misc:Button("Qua Sea 1",function()
+local args = {
+    [1] = {
+        [1] = {
+            [1] = "\3",
+            [2] = "BuyItem",
+            [3] = 111
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+
+  end)
     
+ Misc:Button("Qua Sea 2",function()
+local args = {
+    [1] = {
+        [1] = {
+            [1] = "\3",
+            [2] = "BuyItem",
+            [3] = 110
+        }
+    }
+}
 
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+
+  end)
 
 
 
