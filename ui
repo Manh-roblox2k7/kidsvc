@@ -1,6 +1,13 @@
 
 setfpscap(120)
-
+local vu = game:GetService("VirtualUser")
+    repeat wait() until game:IsLoaded()
+    game:GetService("Players").LocalPlayer.Idled:Connect(function()
+        game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+        vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    end)
 
 -- Instances:v
 
@@ -2736,23 +2743,7 @@ end)
 local Library = Update:Window("Kids","")
 ------------------------------------------
 
-spawn(function()
- game:GetService("RunService").Heartbeat:Connect(function()
-  pcall(function()
-   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-   if _G.Auto_Farm_Ectoplasm and StartMagnetEctoplasm and string.find(v.Name, "Ship") and (v.HumanoidRootPart.Position - PosMonEctoplasm.Position).magnitude <= 350 then
-   v.HumanoidRootPart.CFrame = PosMonEctoplasm
-   v.HumanoidRootPart.CanCollide = false
-   v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-   if v.Humanoid:FindFirstChild("Animator") then
-   v.Humanoid.Animator:Destroy()
-   end
-   sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-   end
-   end
-   end)
-  end)
- end)
+
 
 
 
